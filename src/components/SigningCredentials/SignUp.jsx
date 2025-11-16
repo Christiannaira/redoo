@@ -3,6 +3,7 @@ import { TfiEmail } from "react-icons/tfi";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { useState } from "react";
 import { GoArrowLeft } from "react-icons/go";
+import DummyImage from "../../assets/dummyImage.png";
 
 const SignUp = () => {
    const [passOpen, setPassOpen] = useState(false);
@@ -27,13 +28,18 @@ const SignUp = () => {
    };
 
    return (
-      <div className="w-full min-h-screen p-5 grid lg:grid-cols-2 grid-cols-1">
+      <div className="w-full min-h-screen p-5 grid lg:grid-cols-2 grid-cols-1 gap-5">
          {/* LEFT SIDE FORM */}
          <div className="flex justify-around items-center flex-col">
-            <div>
-               <div></div>
-               <h4>
-                  Already an admin member? <a href="#">Sign In</a>
+            <div className="flex items-center max-w-[500px] w-full justify-between">
+               <div className="p-1 border border-2 border-gray-500 rounded-full cursor-pointer hover:border-[#FF6927] transition transtion duration-300">
+                  <GoArrowLeft size={20} />
+               </div>
+               <h4 className="text-lg font-medium text-gray-600">
+                  Already an admin member?{" "}
+                  <a href="#" className="text-[#FF6927] underline">
+                     Sign In
+                  </a>
                </h4>
             </div>
             <form
@@ -131,7 +137,7 @@ const SignUp = () => {
             </form>
             <button
                type="submit"
-               className="bg-[#FF6927] hover:bg-[#ff7f45] transition text-white p-3 px-10 text-xl rounded-full w-50"
+               className="bg-[#FF6927] hover:bg-[#ff7f45] transition text-white p-3 px-10 text-xl rounded-full max-w-[500px] w-full"
                form="signupForm"
             >
                Sign Up
@@ -140,7 +146,11 @@ const SignUp = () => {
 
          {/* RIGHT SIDE */}
          <div className="flex justify-center items-center">
-            <p className="text-gray-400 text-xl">hello</p>
+            <img
+               src={DummyImage}
+               alt="dummy image"
+               className="lg:w-[500px] w-[300px]"
+            />
          </div>
       </div>
    );
