@@ -29,6 +29,7 @@ function App() {
                   <Route path="history" element={<History />} />
                   <Route path="approval" element={<Approval />} />
                </Route>
+               <Route path="/settings" element={<Settings />} />
             </Routes>
          </BrowserRouter>
       </div>
