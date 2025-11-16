@@ -4,6 +4,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { useState } from "react";
 import { GoArrowLeft } from "react-icons/go";
 import DummyImage from "../../assets/dummyImage.png";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
    const [passOpen, setPassOpen] = useState(false);
@@ -13,6 +14,12 @@ const SignUp = () => {
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
    const [confirmPassword, setConfirmPassword] = useState("");
+
+   const navigator = useNavigate();
+
+   const toSignIn = () => {
+      navigator("/signin");
+   };
 
    const handleSignUp = (e) => {
       e.preventDefault();
@@ -30,14 +37,17 @@ const SignUp = () => {
    return (
       <div className="w-full min-h-screen p-5 grid lg:grid-cols-2 grid-cols-1 gap-5">
          {/* LEFT SIDE FORM */}
-         <div className="flex justify-around items-center flex-col">
+         <div className="flex justify-between items-center flex-col py-5">
             <div className="flex items-center max-w-[500px] w-full justify-between">
                <div className="p-1 border border-2 border-gray-500 rounded-full cursor-pointer hover:border-[#FF6927] transition transtion duration-300">
                   <GoArrowLeft size={20} />
                </div>
                <h4 className="text-lg font-medium text-gray-600">
                   Already an admin member?{" "}
-                  <a href="#" className="text-[#FF6927] underline">
+                  <a
+                     onClick={toSignIn}
+                     className="text-[#FF6927] underline cursor-pointer"
+                  >
                      Sign In
                   </a>
                </h4>

@@ -1,9 +1,16 @@
 import SignUp from "./components/SigningCredentials/SignUp";
+import SignIn from "./components/SigningCredentials/SignIn";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
    return (
       <div>
-         <SignUp />
+         <BrowserRouter>
+            <Routes>
+               <Route path="/signup" element={<SignUp />} />
+               <Route path="/signin" element={<SignIn />} />
+            </Routes>
+         </BrowserRouter>
 
          {/* <div className="p-5">
             <h1>Tailwind Practice</h1>
