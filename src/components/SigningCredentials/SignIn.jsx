@@ -25,7 +25,7 @@ const SignUp = () => {
          password,
       };
 
-      console.log(newEntry);
+      navigator("/dashboard");
    };
 
    return (
@@ -106,7 +106,7 @@ const SignUp = () => {
                className="bg-[#FF6927] hover:bg-[#ff7f45] transition text-white p-3 px-10 text-xl rounded-full max-w-[500px] w-full"
                form="signupForm"
             >
-               Sign Up
+               Sign In
             </button>
          </div>
 
