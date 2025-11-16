@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { MdOutlineSpaceDashboard, MdOutlineWorkHistory } from "react-icons/md";
 import { SiWikibooks } from "react-icons/si";
 import { PiBookBookmark, PiUsers } from "react-icons/pi";
@@ -6,12 +8,20 @@ import { BsHandIndexThumb } from "react-icons/bs";
 import { FiSidebar } from "react-icons/fi";
 
 const Sidebar = () => {
+   const [sideOpen, setSideOpen] = useState(true);
+
+   const handleSideOpen = () => {
+      alert("hello");
+   };
+
    return (
       <div className="bg-white w-full max-w-[350px] min-h-screen p-5 absolute top-0 left-0 flex flex-col justify-between">
          <div>
             <div className="flex items-center justify-between">
-               <h2>Reedo</h2>
-               <FiSidebar />
+               <h2 className="text-2xl text-[#FF6927] font-bold">Reedo</h2>
+               <div onClick={handleSideOpen}>
+                  <FiSidebar />
+               </div>
             </div>
 
             <ul className="mt-5">
