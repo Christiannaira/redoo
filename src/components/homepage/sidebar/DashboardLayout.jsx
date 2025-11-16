@@ -3,15 +3,17 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 
 const DashboardLayout = () => {
-   const [activeSection, setActiveSection] = useState("dashboard");
+   const [sideOpen, setSideOpen] = useState(true);
 
    return (
       <div>
-         <Sidebar
-            activeSection={activeSection}
-            setActiveSection={setActiveSection}
-         />
-         <div className="bg-[#FAF7F5] min-h-screen ml-[350px]">
+         <Sidebar sideOpen={sideOpen} setSideOpen={setSideOpen} />
+         <div
+            className={
+               `bg-[#FAF7F5] min-h-screen transition-all duration-300 ease-in-out ` +
+               (sideOpen ? "ml-[350px]" : "ml-[120px]")
+            }
+         >
             <Outlet />
          </div>
       </div>

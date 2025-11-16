@@ -8,23 +8,31 @@ import { BsHandIndexThumb } from "react-icons/bs";
 import { FiSidebar } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
-const Sidebar = ({ activeSection, setActiveSection }) => {
-   const [sideOpen, setSideOpen] = useState(true);
+const Sidebar = ({ sideOpen, setSideOpen }) => {
+   const [activeSection, setActiveSection] = useState("dashboard");
 
    const handleSideOpen = () => {
       setSideOpen(!sideOpen);
-      alert("hello");
    };
 
    return (
       <div
-         className={`bg-white w-full max-w-[350px] min-h-screen p-5 absolute top-0 left-0 flex flex-col justify-between`}
+         className={
+            `transition-all duration-300 ease-in-out bg-white w-full min-h-screen p-5 absolute top-0 left-0 flex flex-col justify-between ` +
+            (sideOpen ? "max-w-[350px]" : "max-w-[90px]")
+         }
       >
          <div>
             <div className="flex items-center justify-between">
-               <h2 className="text-2xl text-[#FF6927] font-bold">Reedo</h2>
-               <div onClick={handleSideOpen}>
-                  <FiSidebar />
+               <h2
+                  className={`text-2xl text-[#FF6927] font-bold ${
+                     sideOpen ? "" : "hidden"
+                  }`}
+               >
+                  Reedo
+               </h2>
+               <div onClick={handleSideOpen} className="cursor-pointer group">
+                  <FiSidebar className="group-hover:text-[#FF6927] transition duration-300" />
                </div>
             </div>
 
@@ -34,7 +42,7 @@ const Sidebar = ({ activeSection, setActiveSection }) => {
                      <MdOutlineSpaceDashboard
                         size={20}
                         className={
-                           "group-hover:text-[#FF6927] transition duration-300 " +
+                           "group-hover:text-[#FF6927] transition duration-200 " +
                            (activeSection === "dashboard"
                               ? "text-[#FF6927]"
                               : "text-[#222222]")
@@ -51,6 +59,7 @@ const Sidebar = ({ activeSection, setActiveSection }) => {
                         <Link
                            to="/dashboard"
                            onClick={() => setActiveSection("dashboard")}
+                           className={sideOpen ? "" : "hidden"}
                         >
                            Dashboard
                         </Link>
@@ -77,6 +86,7 @@ const Sidebar = ({ activeSection, setActiveSection }) => {
                         <Link
                            to={"user-management"}
                            onClick={() => setActiveSection("user-management")}
+                           className={sideOpen ? "" : "hidden"}
                         >
                            User Management
                         </Link>
@@ -103,6 +113,7 @@ const Sidebar = ({ activeSection, setActiveSection }) => {
                         <Link
                            to={"books-management"}
                            onClick={() => setActiveSection("books-management")}
+                           className={sideOpen ? "" : "hidden"}
                         >
                            Books Management
                         </Link>
@@ -130,6 +141,7 @@ const Sidebar = ({ activeSection, setActiveSection }) => {
                         <Link
                            to={"borrow-books"}
                            onClick={() => setActiveSection("borrows-book")}
+                           className={sideOpen ? "" : "hidden"}
                         >
                            Borrow Books
                         </Link>
@@ -156,6 +168,7 @@ const Sidebar = ({ activeSection, setActiveSection }) => {
                         <Link
                            to={"history"}
                            onClick={() => setActiveSection("history")}
+                           className={sideOpen ? "" : "hidden"}
                         >
                            History
                         </Link>
@@ -182,6 +195,7 @@ const Sidebar = ({ activeSection, setActiveSection }) => {
                         <Link
                            to={"approval"}
                            onClick={() => setActiveSection("approval")}
+                           className={sideOpen ? "" : "hidden"}
                         >
                            approval
                         </Link>
@@ -199,7 +213,12 @@ const Sidebar = ({ activeSection, setActiveSection }) => {
                      className="text-[#222222] group-hover:text-[#FF6927] transition duration-300"
                   />
                   <h2 className="text-2xl text-[#222222] font-medium group-hover:text-[#FF6927] transition duration-300">
-                     <Link to={"/settings"}>Settings</Link>
+                     <Link
+                        to={"/settings"}
+                        className={sideOpen ? "" : "hidden"}
+                     >
+                        Settings
+                     </Link>
                   </h2>
                </li>
                <li className="flex items-center gap-3 my-3 group cursor-pointer">
