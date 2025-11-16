@@ -1,12 +1,5 @@
-import Sidebar from "./Sidebar";
-
 const Dashboard = () => {
-   return (
-      <div>
-         Dashboard
-         <Sidebar />
-      </div>
-   );
+   return <div className="bg-[#FAF7F5] min-h-screen"></div>;
 };
 
 export default Dashboard;
