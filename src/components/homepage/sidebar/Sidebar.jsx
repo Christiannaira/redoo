@@ -18,19 +18,12 @@ const Sidebar = ({ sideOpen, setSideOpen }) => {
    return (
       <div
          className={
-            `transition-all duration-300 ease-in-out bg-white w-full min-h-screen p-5 absolute top-0 left-0 flex flex-col justify-between ` +
+            `transition-all duration-300 ease-in-out bg-white w-full min-h-screen p-5 absolute left-0 flex flex-col justify-between ` +
             (sideOpen ? "max-w-[350px]" : "max-w-[90px]")
          }
       >
-         <div>
-            <div className="flex items-center justify-between">
-               <h2
-                  className={`text-2xl text-[#FF6927] font-bold ${
-                     sideOpen ? "" : "hidden"
-                  }`}
-               >
-                  Reedo
-               </h2>
+         <div className="mt-13">
+            <div className="flex items-center justify-end">
                <div onClick={handleSideOpen} className="cursor-pointer group">
                   <FiSidebar className="group-hover:text-[#FF6927] transition duration-300" />
                </div>
@@ -42,7 +35,11 @@ const Sidebar = ({ sideOpen, setSideOpen }) => {
                      to="/dashboard"
                      onClick={() => setActiveSection("dashboard")}
                   >
-                     <li className="flex items-center gap-3 my-3 group cursor-pointer">
+                     <li
+                        className={`flex items-center gap-3 my-5 mt-10 group cursor-pointer ${
+                           sideOpen ? "" : "justify-center"
+                        }`}
+                     >
                         <MdOutlineSpaceDashboard
                            size={20}
                            className={
@@ -68,7 +65,11 @@ const Sidebar = ({ sideOpen, setSideOpen }) => {
                      to={"user-management"}
                      onClick={() => setActiveSection("user-management")}
                   >
-                     <li className="flex items-center gap-3 my-3 group cursor-pointer">
+                     <li
+                        className={`flex items-center gap-3 my-5 group cursor-pointer ${
+                           sideOpen ? "" : "justify-center"
+                        }`}
+                     >
                         <PiUsers
                            size={20}
                            className={
@@ -94,7 +95,11 @@ const Sidebar = ({ sideOpen, setSideOpen }) => {
                      to={"books-management"}
                      onClick={() => setActiveSection("books-management")}
                   >
-                     <li className="flex items-center gap-3 my-3 group cursor-pointer">
+                     <li
+                        className={`flex items-center gap-3 my-5 group cursor-pointer ${
+                           sideOpen ? "" : "justify-center"
+                        }`}
+                     >
                         <SiWikibooks
                            size={20}
                            className={
@@ -120,7 +125,11 @@ const Sidebar = ({ sideOpen, setSideOpen }) => {
                      to={"borrow-books"}
                      onClick={() => setActiveSection("borrows-book")}
                   >
-                     <li className="flex items-center gap-3 my-3 group cursor-pointer">
+                     <li
+                        className={`flex items-center gap-3 my-5 group cursor-pointer ${
+                           sideOpen ? "" : "justify-center"
+                        }`}
+                     >
                         <PiBookBookmark
                            size={20}
                            className={
@@ -146,7 +155,11 @@ const Sidebar = ({ sideOpen, setSideOpen }) => {
                      to={"history"}
                      onClick={() => setActiveSection("history")}
                   >
-                     <li className="flex items-center gap-3 my-3 group cursor-pointer">
+                     <li
+                        className={`flex items-center gap-3 my-5 group cursor-pointer ${
+                           sideOpen ? "" : "justify-center"
+                        }`}
+                     >
                         <MdOutlineWorkHistory
                            size={20}
                            className={
@@ -172,7 +185,11 @@ const Sidebar = ({ sideOpen, setSideOpen }) => {
                      to={"approval"}
                      onClick={() => setActiveSection("approval")}
                   >
-                     <li className="flex items-center gap-3 my-3 group cursor-pointer">
+                     <li
+                        className={`flex items-center gap-3 my-5 group cursor-pointer ${
+                           sideOpen ? "" : "justify-center"
+                        }`}
+                     >
                         <BsHandIndexThumb
                            size={20}
                            className={
