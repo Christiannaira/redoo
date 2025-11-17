@@ -142,61 +142,57 @@ const Sidebar = ({ sideOpen, setSideOpen }) => {
                         </h2>
                      </li>
                   </Link>
-
-                  <li className="flex items-center gap-3 my-3 group cursor-pointer">
-                     <MdOutlineWorkHistory
-                        size={20}
-                        className={
-                           "group-hover:text-[#FF6927] transition duration-300 " +
-                           (activeSection === "history"
-                              ? "text-[#FF6927]"
-                              : "text-[#222222]")
-                        }
-                     />
-                     <h2
-                        className={
-                           "text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 " +
-                           (activeSection === "history"
-                              ? "text-[#FF6927]"
-                              : "text-[#222222]")
-                        }
-                     >
-                        <Link
-                           to={"history"}
-                           onClick={() => setActiveSection("history")}
-                           className={sideOpen ? "" : "hidden"}
+                  <Link
+                     to={"history"}
+                     onClick={() => setActiveSection("history")}
+                  >
+                     <li className="flex items-center gap-3 my-3 group cursor-pointer">
+                        <MdOutlineWorkHistory
+                           size={20}
+                           className={
+                              "group-hover:text-[#FF6927] transition duration-300 " +
+                              (activeSection === "history"
+                                 ? "text-[#FF6927]"
+                                 : "text-[#222222]")
+                           }
+                        />
+                        <h2
+                           className={`text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 ${
+                              activeSection === "history"
+                                 ? "text-[#FF6927]"
+                                 : "text-[#222222]"
+                           } ${sideOpen ? "" : "hidden"}`}
                         >
                            History
-                        </Link>
-                     </h2>
-                  </li>
-                  <li className="flex items-center gap-3 my-3 group cursor-pointer">
-                     <BsHandIndexThumb
-                        size={20}
-                        className={
-                           "group-hover:text-[#FF6927] transition duration-300 " +
-                           (activeSection === "approval"
-                              ? "text-[#FF6927]"
-                              : "text-[#222222]")
-                        }
-                     />
-                     <h2
-                        className={
-                           "text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 " +
-                           (activeSection === "approval"
-                              ? "text-[#FF6927]"
-                              : "text-[#222222]")
-                        }
-                     >
-                        <Link
-                           to={"approval"}
-                           onClick={() => setActiveSection("approval")}
-                           className={sideOpen ? "" : "hidden"}
+                        </h2>
+                     </li>
+                  </Link>
+
+                  <Link
+                     to={"approval"}
+                     onClick={() => setActiveSection("approval")}
+                  >
+                     <li className="flex items-center gap-3 my-3 group cursor-pointer">
+                        <BsHandIndexThumb
+                           size={20}
+                           className={
+                              "group-hover:text-[#FF6927] transition duration-300 " +
+                              (activeSection === "approval"
+                                 ? "text-[#FF6927]"
+                                 : "text-[#222222]")
+                           }
+                        />
+                        <h2
+                           className={`text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 ${
+                              activeSection === "approval"
+                                 ? "text-[#FF6927]"
+                                 : "text-[#222222]"
+                           } ${sideOpen ? "" : "hidden"}`}
                         >
-                           approval
-                        </Link>
-                     </h2>
-                  </li>
+                           Approval
+                        </h2>
+                     </li>
+                  </Link>
                </div>
             </ul>
          </div>
