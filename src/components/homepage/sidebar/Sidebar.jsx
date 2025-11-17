@@ -18,7 +18,7 @@ const Sidebar = ({ sideOpen, setSideOpen }) => {
    return (
       <div
          className={
-            `transition-all duration-300 ease-in-out bg-white w-full min-h-screen p-5 absolute left-0 flex flex-col justify-between ` +
+            `transition-all duration-300 ease-in-out bg-white w-full min-h-screen p-5 fixed left-0 flex flex-col justify-between ` +
             (sideOpen ? "max-w-[350px]" : "max-w-[90px]")
          }
       >

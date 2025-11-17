@@ -12,7 +12,7 @@ const DashboardLayout = () => {
          <Sidebar sideOpen={sideOpen} setSideOpen={setSideOpen} />
          <div
             className={
-               `bg-[#FAF7F5] min-h-screen transition-all duration-300 ease-in-out pt-[80px] ` +
+               `bg-[#FAF7F5] min-h-screen transition-all duration-300 ease-in-out pt-[70px] ` +
                (sideOpen ? "ml-[350px]" : "ml-[120px]")
             }
          >
