@@ -116,34 +116,33 @@ const Sidebar = ({ sideOpen, setSideOpen }) => {
                      </li>
                   </Link>
 
-                  <li className="flex items-center gap-3 my-3 group cursor-pointer">
-                     <PiBookBookmark
-                        size={20}
-                        className={
-                           "group-hover:text-[#FF6927] transition duration-300 " +
-                           (activeSection === "borrows-book"
-                              ? "text-[#FF6927]"
-                              : "text-[#222222]")
-                        }
-                     />
+                  <Link
+                     to={"borrow-books"}
+                     onClick={() => setActiveSection("borrows-book")}
+                  >
+                     <li className="flex items-center gap-3 my-3 group cursor-pointer">
+                        <PiBookBookmark
+                           size={20}
+                           className={
+                              "group-hover:text-[#FF6927] transition duration-300 " +
+                              (activeSection === "borrows-book"
+                                 ? "text-[#FF6927]"
+                                 : "text-[#222222]")
+                           }
+                        />
 
-                     <h2
-                        className={
-                           "text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 " +
-                           (activeSection === "borrows-book"
-                              ? "text-[#FF6927]"
-                              : "text-[#222222]")
-                        }
-                     >
-                        <Link
-                           to={"borrow-books"}
-                           onClick={() => setActiveSection("borrows-book")}
-                           className={sideOpen ? "" : "hidden"}
+                        <h2
+                           className={`text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 ${
+                              activeSection === "borrows-book"
+                                 ? "text-[#FF6927]"
+                                 : "text-[#222222]"
+                           } ${sideOpen ? "" : "hidden"}`}
                         >
                            Borrow Books
-                        </Link>
-                     </h2>
-                  </li>
+                        </h2>
+                     </li>
+                  </Link>
+
                   <li className="flex items-center gap-3 my-3 group cursor-pointer">
                      <MdOutlineWorkHistory
                         size={20}
