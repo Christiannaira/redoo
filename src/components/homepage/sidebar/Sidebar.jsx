@@ -38,33 +38,32 @@ const Sidebar = ({ sideOpen, setSideOpen }) => {
 
             <ul className="mt-5">
                <div>
-                  <li className="flex items-center gap-3 my-3 group cursor-pointer">
-                     <MdOutlineSpaceDashboard
-                        size={20}
-                        className={
-                           "group-hover:text-[#FF6927] transition duration-200 " +
-                           (activeSection === "dashboard"
-                              ? "text-[#FF6927]"
-                              : "text-[#222222]")
-                        }
-                     />
-                     <h2
-                        className={
-                           "text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 " +
-                           (activeSection === "dashboard"
-                              ? "text-[#FF6927]"
-                              : "text-[#222222]")
-                        }
-                     >
-                        <Link
-                           to="/dashboard"
-                           onClick={() => setActiveSection("dashboard")}
-                           className={sideOpen ? "" : "hidden"}
+                  <Link
+                     to="/dashboard"
+                     onClick={() => setActiveSection("dashboard")}
+                  >
+                     <li className="flex items-center gap-3 my-3 group cursor-pointer">
+                        <MdOutlineSpaceDashboard
+                           size={20}
+                           className={
+                              "group-hover:text-[#FF6927] transition duration-200 " +
+                              (activeSection === "dashboard"
+                                 ? "text-[#FF6927]"
+                                 : "text-[#222222]")
+                           }
+                        />
+                        <h2
+                           className={`text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 ${
+                              activeSection === "dashboard"
+                                 ? "text-[#FF6927]"
+                                 : "text-[#222222]"
+                           } ${sideOpen ? "" : "hidden"}`}
                         >
                            Dashboard
-                        </Link>
-                     </h2>
-                  </li>
+                        </h2>
+                     </li>
+                  </Link>
+
                   <li className="flex items-center gap-3 my-3 group cursor-pointer">
                      <PiUsers
                         size={20}
@@ -226,7 +225,11 @@ const Sidebar = ({ sideOpen, setSideOpen }) => {
                      size={20}
                      className="text-[#222222] group-hover:text-[#FF6927] transition duration-300"
                   />
-                  <h2 className="text-2xl text-[#222222] font-medium group-hover:text-[#FF6927] transition duration-300">
+                  <h2
+                     className={`text-2xl text-[#222222] font-medium group-hover:text-[#FF6927] transition duration-300 ${
+                        sideOpen ? "" : "hidden"
+                     }`}
+                  >
                      Logout
                   </h2>
                </li>
