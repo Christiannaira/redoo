@@ -93,7 +93,6 @@ const Sidebar = ({ sideOpen, setSideOpen }) => {
                   <Link
                      to={"books-management"}
                      onClick={() => setActiveSection("books-management")}
-                     className={sideOpen ? "" : "hidden"}
                   >
                      <li className="flex items-center gap-3 my-3 group cursor-pointer">
                         <SiWikibooks
@@ -106,12 +105,11 @@ const Sidebar = ({ sideOpen, setSideOpen }) => {
                            }
                         />
                         <h2
-                           className={
-                              "text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 " +
-                              (activeSection === "books-management"
+                           className={`text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 ${
+                              activeSection === "books-management"
                                  ? "text-[#FF6927]"
-                                 : "text-[#222222]")
-                           }
+                                 : "text-[#222222]"
+                           } ${sideOpen ? "" : "hidden"}`}
                         >
                            Books Management
                         </h2>
