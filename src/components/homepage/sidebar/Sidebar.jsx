@@ -64,60 +64,60 @@ const Sidebar = ({ sideOpen, setSideOpen }) => {
                      </li>
                   </Link>
 
-                  <li className="flex items-center gap-3 my-3 group cursor-pointer">
-                     <PiUsers
-                        size={20}
-                        className={
-                           "group-hover:text-[#FF6927] transition duration-300 " +
-                           (activeSection === "user-management"
-                              ? "text-[#FF6927]"
-                              : "text-[#222222]")
-                        }
-                     />
-                     <h2
-                        className={
-                           "text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 " +
-                           (activeSection === "user-management"
-                              ? "text-[#FF6927]"
-                              : "text-[#222222]")
-                        }
-                     >
-                        <Link
-                           to={"user-management"}
-                           onClick={() => setActiveSection("user-management")}
-                           className={sideOpen ? "" : "hidden"}
+                  <Link
+                     to={"user-management"}
+                     onClick={() => setActiveSection("user-management")}
+                  >
+                     <li className="flex items-center gap-3 my-3 group cursor-pointer">
+                        <PiUsers
+                           size={20}
+                           className={
+                              "group-hover:text-[#FF6927] transition duration-300 " +
+                              (activeSection === "user-management"
+                                 ? "text-[#FF6927]"
+                                 : "text-[#222222]")
+                           }
+                        />
+                        <h2
+                           className={`text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 ${
+                              activeSection === "user-management"
+                                 ? "text-[#FF6927]"
+                                 : "text-[#222222]"
+                           } ${sideOpen ? "" : "hidden"}`}
                         >
                            User Management
-                        </Link>
-                     </h2>
-                  </li>
-                  <li className="flex items-center gap-3 my-3 group cursor-pointer">
-                     <SiWikibooks
-                        size={20}
-                        className={
-                           "group-hover:text-[#FF6927] transition duration-300 " +
-                           (activeSection === "books-management"
-                              ? "text-[#FF6927]"
-                              : "text-[#222222]")
-                        }
-                     />
-                     <h2
-                        className={
-                           "text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 " +
-                           (activeSection === "books-management"
-                              ? "text-[#FF6927]"
-                              : "text-[#222222]")
-                        }
-                     >
-                        <Link
-                           to={"books-management"}
-                           onClick={() => setActiveSection("books-management")}
-                           className={sideOpen ? "" : "hidden"}
+                        </h2>
+                     </li>
+                  </Link>
+
+                  <Link
+                     to={"books-management"}
+                     onClick={() => setActiveSection("books-management")}
+                     className={sideOpen ? "" : "hidden"}
+                  >
+                     <li className="flex items-center gap-3 my-3 group cursor-pointer">
+                        <SiWikibooks
+                           size={20}
+                           className={
+                              "group-hover:text-[#FF6927] transition duration-300 " +
+                              (activeSection === "books-management"
+                                 ? "text-[#FF6927]"
+                                 : "text-[#222222]")
+                           }
+                        />
+                        <h2
+                           className={
+                              "text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 " +
+                              (activeSection === "books-management"
+                                 ? "text-[#FF6927]"
+                                 : "text-[#222222]")
+                           }
                         >
                            Books Management
-                        </Link>
-                     </h2>
-                  </li>
+                        </h2>
+                     </li>
+                  </Link>
+
                   <li className="flex items-center gap-3 my-3 group cursor-pointer">
                      <PiBookBookmark
                         size={20}
