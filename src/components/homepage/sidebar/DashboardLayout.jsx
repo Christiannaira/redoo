@@ -8,7 +8,7 @@ const DashboardLayout = () => {
 
    return (
       <div>
-         <Navbar sideOpen={sideOpen} />
+         <Navbar />
          <Sidebar sideOpen={sideOpen} setSideOpen={setSideOpen} />
          <div
             className={
