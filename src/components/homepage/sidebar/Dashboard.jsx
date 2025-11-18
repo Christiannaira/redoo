@@ -43,10 +43,10 @@ const Dashboard = () => {
       <div className="p-4">
          <h1 className="text-4xl font-medium text-[#444444]">Dashboard</h1>
          <div className="bg-white p-5 rounded-sm my-5 w-full">
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3">
                <div className="flex items-center gap-3 relative">
-                  <div className="h-full w-1 bg-gray-900/5 top-0 right-30 absolute rounded-full" />
-                  <div class="w-25 h-25 rounded-full bg-gradient-to-b from-orange-400 to-white flex items-center justify-center">
+                  <div className="xl:h-full xl:w-1 xl:bg-gray-900/5 xl:top-0 xl:right-30 xl:absolute xl:rounded-full" />
+                  <div className="w-25 h-25 rounded-full bg-gradient-to-b from-orange-400 to-white flex items-center justify-center">
                      <PiUsers size={35} color="#fff" />
                   </div>
                   <div>
@@ -58,7 +58,7 @@ const Dashboard = () => {
                </div>
 
                <div className="flex items-center gap-3 relative">
-                  <div className="h-full w-1 bg-gray-900/5 top-0 right-30 absolute rounded-full" />
+                  <div className="xl:h-full xl:w-1 xl:bg-gray-900/5 xl:top-0 xl:right-30 xl:absolute xl:rounded-full" />
                   <div class="w-25 h-25 rounded-full bg-gradient-to-b from-orange-400 to-white flex items-center justify-center">
                      <MdOutlineVerified size={35} color="#fff" />
                   </div>
@@ -83,7 +83,7 @@ const Dashboard = () => {
                </div>
             </div>
          </div>
-         <div className="grid grid-cols-2 gap-5 mt-3 min-h-screen">
+         <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 mt-3 min-h-screen">
             <div className="bg-white p-5 rounded-sm">
                <div className="flex items-center justify-between">
                   <h3>All Users</h3>
