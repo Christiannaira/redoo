@@ -122,9 +122,13 @@ const Dashboard = () => {
                         ))}
                      </div>
                   </div>
-                  <div>
-                     <button>Borrow Book</button>
-                     <button>Return Books</button>
+                  <div className="flex items-center justify-center gap-3 mt-5">
+                     <button className="px-8 py-4 border border-orange-600 rounded-2xl cursor-pointer hover:bg-orange-600 hover:text-white transition-all duration ease-in-out font-medium">
+                        Borrow Book
+                     </button>
+                     <button className="px-8 py-4 border border-transparent bg-orange-600 text-white rounded-2xl cursor-pointer hover:border-orange-600 transition-all duration ease-in-out hover:bg-orange-700 font-medium">
+                        Return Books
+                     </button>
                   </div>
                </div>
             </div>
