@@ -8,6 +8,7 @@ import BorrowBooks from "./components/homepage/sidebar/Borrow";
 import History from "./components/homepage/sidebar/History";
 import Approval from "./components/homepage/sidebar/Approval";
 import Settings from "./components/homepage/sidebar/Settings";
+import UserProfileCard from "./components/homepage/sidebar/cards/UserProfileCard";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -30,6 +31,7 @@ function App() {
                   <Route path="approval" element={<Approval />} />
                </Route>
                <Route path="/settings" element={<Settings />} />
+               <Route path="/userprofile" element={<UserProfileCard />} />
             </Routes>
          </BrowserRouter>
       </div>

@@ -20,11 +20,6 @@ const Dashboard = () => {
    function getAllUsers() {
       listUsers()
          .then((response) => {
-            // const sortedUsers = [...response.data].sort(
-            //    (a, b) => new Date(b.dateCreated) - new Date(a.dateCreated)
-            // );
-
-            // sorting desc data in frontend
             setUsers(response.data);
          })
          .catch((error) => {
@@ -84,7 +79,7 @@ const Dashboard = () => {
 
                <div className="flex items-center gap-3 relative">
                   <div className="xl:h-full xl:w-1 xl:bg-gray-900/5 xl:top-0 xl:right-30 xl:absolute xl:rounded-full" />
-                  <div class="w-25 h-25 rounded-full bg-gradient-to-b from-orange-400 to-white flex items-center justify-center">
+                  <div className="w-25 h-25 rounded-full bg-gradient-to-b from-orange-400 to-white flex items-center justify-center">
                      <MdOutlineVerified size={35} color="#fff" />
                   </div>
                   <div>
@@ -95,7 +90,7 @@ const Dashboard = () => {
                   </div>
                </div>
                <div className="flex items-center gap-3 relative">
-                  <div class="w-25 h-25 rounded-full bg-gradient-to-b from-orange-400 to-white flex items-center justify-center">
+                  <div className="w-25 h-25 rounded-full bg-gradient-to-b from-orange-400 to-white flex items-center justify-center">
                      <PiBooks size={35} color="#fff" />
                   </div>
 
