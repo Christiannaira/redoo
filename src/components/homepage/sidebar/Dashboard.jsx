@@ -8,6 +8,7 @@ import { PiUsers, PiBooks } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { listUsers } from "../../../services/UserServices";
+import UserCard from "./cards/UserCard";
 
 const Dashboard = () => {
    const [users, setUsers] = useState([]);
@@ -127,13 +128,7 @@ const Dashboard = () => {
                      </div>
                   ))} */}
                   {users.map((user, key) => (
-                     <div
-                        key={key}
-                        className="flex justify-between items-center bg-gray-200 mb-2 py-2 px-3 rounded-sm hover:bg-[#FF6927] cursor-pointer transition-full duration-200 ease-in-out"
-                     >
-                        <h3>{user.username}</h3>
-                        <span>{user.email}</span>
-                     </div>
+                     <UserCard user={user} key={key} />
                   ))}
                </div>
             </div>
