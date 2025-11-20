@@ -6,8 +6,26 @@ import Approval from "./Approval";
 import { MdOutlineVerified } from "react-icons/md";
 import { PiUsers, PiBooks } from "react-icons/pi";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { listUsers } from "../../../services/UserServices";
 
 const Dashboard = () => {
+   const [users, setUsers] = useState([]);
+
+   useEffect(() => {
+      getAllUsers();
+   }, []);
+
+   function getAllUsers() {
+      listUsers()
+         .then((response) => {
+            setUsers(response.data);
+         })
+         .catch((error) => {
+            console.error(error);
+         });
+   }
+
    const dummyAccounts = [
       { username: "Christian Naira", date: "11/15/2025" },
       { username: "Zaid Competente", date: "11/15/2025" },
