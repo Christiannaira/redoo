@@ -8,9 +8,12 @@ import { BsHandIndexThumb } from "react-icons/bs";
 import { FiSidebar } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
-const Sidebar = ({ sideOpen, setSideOpen }) => {
-   const [activeSection, setActiveSection] = useState("dashboard");
-
+const Sidebar = ({
+   sideOpen,
+   setSideOpen,
+   activeSection,
+   setActiveSection,
+}) => {
    const handleSideOpen = () => {
       setSideOpen(!sideOpen);
    };

@@ -9,9 +9,18 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { listUsers } from "../../../services/UserServices";
 import UserCard from "./cards/UserCard";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 const Dashboard = () => {
    const [users, setUsers] = useState([]);
+   const { setActiveSection } = useOutletContext();
+
+   const navigator = useNavigate();
+
+   const handleViewClick = () => {
+      navigator("/dashboard/user-management");
+      setActiveSection("user-management");
+   };
 
    useEffect(() => {
       getAllUsers();
@@ -107,9 +116,12 @@ const Dashboard = () => {
             <div className="bg-white p-5 rounded-sm">
                <div className="flex items-center justify-between">
                   <h3 className="font-bold text-3xl">All Users</h3>
-                  <Link className="font-medium text-[#FF6927] text-xl">
+                  <span
+                     className="font-medium text-[#FF6927] text-xl cursor-pointer"
+                     onClick={handleViewClick}
+                  >
                      View All
-                  </Link>
+                  </span>
                </div>
                <div className="mt-5">
                   {/* {dummyAccounts.map((account, key) => (
