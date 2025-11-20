@@ -5,6 +5,7 @@ import { useState } from "react";
 import { GoArrowLeft } from "react-icons/go";
 import DummyImage from "../../assets/dummyImage.png";
 import { useNavigate } from "react-router-dom";
+import { createUser } from "../../services/UserServices";
 
 const SignUp = () => {
    const [passOpen, setPassOpen] = useState(false);
@@ -32,6 +33,15 @@ const SignUp = () => {
       };
 
       console.log(newEntry);
+
+      createUser(newEntry)
+         .then((response) => {
+            console.log(response);
+            navigator("/dashboard");
+         })
+         .catch((error) => {
+            console.error(error);
+         });
    };
 
    return (
