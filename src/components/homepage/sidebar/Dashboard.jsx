@@ -19,7 +19,11 @@ const Dashboard = () => {
    function getAllUsers() {
       listUsers()
          .then((response) => {
-            setUsers(response.data);
+            const sortedUsers = [...response.data].sort(
+               (a, b) => new Date(b.dateCreated) - new Date(a.dateCreated)
+            );
+
+            setUsers(sortedUsers);
          })
          .catch((error) => {
             console.error(error);
@@ -111,7 +115,7 @@ const Dashboard = () => {
                   </Link>
                </div>
                <div className="mt-5">
-                  {dummyAccounts.map((account, key) => (
+                  {/* {dummyAccounts.map((account, key) => (
                      <div
                         key={key}
                         className="flex justify-between items-center bg-gray-200 mb-2 py-2 px-3 rounded-sm hover:bg-[#FF6927] cursor-pointer transition-full duration-200 ease-in-out"
@@ -119,6 +123,15 @@ const Dashboard = () => {
                      >
                         <h3>{account.username}</h3>
                         <span>{account.date}</span>
+                     </div>
+                  ))} */}
+                  {users.map((user, key) => (
+                     <div
+                        key={key}
+                        className="flex justify-between items-center bg-gray-200 mb-2 py-2 px-3 rounded-sm hover:bg-[#FF6927] cursor-pointer transition-full duration-200 ease-in-out"
+                     >
+                        <h3>{user.username}</h3>
+                        <span>{user.email}</span>
                      </div>
                   ))}
                </div>
