@@ -19,11 +19,12 @@ const Dashboard = () => {
    function getAllUsers() {
       listUsers()
          .then((response) => {
-            const sortedUsers = [...response.data].sort(
-               (a, b) => new Date(b.dateCreated) - new Date(a.dateCreated)
-            );
+            // const sortedUsers = [...response.data].sort(
+            //    (a, b) => new Date(b.dateCreated) - new Date(a.dateCreated)
+            // );
 
-            setUsers(sortedUsers);
+            // sorting desc data in frontend
+            setUsers(response.data);
          })
          .catch((error) => {
             console.error(error);
