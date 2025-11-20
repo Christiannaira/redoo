@@ -5,6 +5,7 @@ import History from "./History";
 import Approval from "./Approval";
 import { MdOutlineVerified } from "react-icons/md";
 import { PiUsers, PiBooks } from "react-icons/pi";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
    const dummyAccounts = [
@@ -86,8 +87,10 @@ const Dashboard = () => {
          <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 mt-3 min-h-screen">
             <div className="bg-white p-5 rounded-sm">
                <div className="flex items-center justify-between">
-                  <h3>All Users</h3>
-                  <a href="">View All</a>
+                  <h3 className="font-bold text-3xl">All Users</h3>
+                  <Link className="font-medium text-[#FF6927] text-xl">
+                     View All
+                  </Link>
                </div>
                <div className="mt-5">
                   {dummyAccounts.map((account, key) => (
@@ -106,10 +109,12 @@ const Dashboard = () => {
                <div>
                   <div className="bg-white p-5 rounded-sm">
                      <div className="flex items-center justify-between">
-                        <h3>All Books</h3>
-                        <a href="">View All</a>
+                        <h3 className="font-bold text-3xl">All Books</h3>
+                        <Link className="font-medium text-[#FF6927] text-xl">
+                           View All
+                        </Link>
                      </div>
-                     <div>
+                     <div className="mt-5">
                         {dummyBooks.map((book, key) => (
                            <div
                               key={key}
