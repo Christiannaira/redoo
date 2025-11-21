@@ -9,8 +9,7 @@ const UserCard = ({ user, location, getAllUsers }) => {
    const navigator = useNavigate();
 
    const handleUser = (user) => {
-      alert(user.username);
-      navigator("profile", { state: user });
+      navigator(`profile/${user.id}`);
    };
 
    const removeUser = (userId) => {

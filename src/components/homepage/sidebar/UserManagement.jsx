@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { listUsers } from "../../../services/UserServices";
 import UserCard from "./cards/UserCard";
-import Profile from "./cards/Profile";
 
 const UserManagement = () => {
    const [users, setUsers] = useState([]);

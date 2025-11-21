@@ -23,7 +23,7 @@ function App() {
                   <Route index element={<Dashboard />} />
                   <Route path="user-management">
                      <Route index element={<UserManagement />} />
-                     <Route path="profile" element={<UserProfileCard />} />
+                     <Route path="profile/:id" element={<UserProfileCard />} />
                   </Route>
                   <Route
                      path="books-management"

@@ -1,10 +1,19 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
+import { getUser } from "../../../../services/UserServices";
 import { Link } from "react-router-dom";
 
 const UserProfileCard = () => {
-   const location = useLocation();
-   const user = location.state;
+   const { id } = useParams();
+   const [user, setUser] = useState(null);
+
+   useEffect(() => {
+      getUser(id)
+         .then((response) => setUser(response.data))
+         .catch((err) => console.error(err));
+   }, [id]);
+
+   if (!user) return <p>Loading...</p>;
 
    return (
       <div>
