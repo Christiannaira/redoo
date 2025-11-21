@@ -1,8 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
+import { deleteUser } from "../../../../services/UserServices";
 
-const UserCard = ({ user, location }) => {
+const UserCard = ({ user, location, getAllUsers }) => {
    const dateCreation = new Date(user.dateCreated);
 
    const navigator = useNavigate();
@@ -10,6 +11,19 @@ const UserCard = ({ user, location }) => {
    const handleUser = (user) => {
       alert(user.username);
       navigator("/userprofile", { state: user });
+   };
+
+   const removeUser = (userId) => {
+      alert(userId);
+
+      deleteUser(userId)
+         .then((response) => {
+            getAllUsers();
+            console.log("User is successfully deleted");
+         })
+         .catch((error) => {
+            console.error(error);
+         });
    };
 
    if (location === "user-management") {
@@ -29,7 +43,7 @@ const UserCard = ({ user, location }) => {
             </h3>
 
             {/* First Name - visible on lg and above */}
-            <h3 className="font-medium text-[14px] truncate hidden lg:block">
+            <h3 className={`font-medium text-[14px] truncate hidden lg:block`}>
                {user.firstName ?? "not set"}
             </h3>
 
@@ -60,7 +74,7 @@ const UserCard = ({ user, location }) => {
                className="flex items-center justify-center cursor-pointer text-red-500 hover:text-red-700 hidden xl:flex"
                onClick={(e) => {
                   e.stopPropagation();
-                  alert("user deleted");
+                  removeUser(user.id);
                }}
             >
                <FaTrashAlt />

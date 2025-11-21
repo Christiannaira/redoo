@@ -53,6 +53,7 @@ const UserManagement = () => {
                      user={user}
                      key={key}
                      location={"user-management"}
+                     getAllUsers={getAllUsers}
                   />
                ))}
             </div>
