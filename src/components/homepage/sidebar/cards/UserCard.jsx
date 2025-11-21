@@ -33,22 +33,34 @@ const UserCard = ({ user, location, getAllUsers }) => {
             onClick={() => handleUser(user)}
          >
             {/* Username - always visible */}
-            <h3 className="font-medium text-[14px] truncate">
+            <h3 className="font-medium text-[#222222] text-[14px] truncate">
                {user.username}
             </h3>
 
             {/* Email - visible on md and above */}
-            <h3 className="font-medium text-[14px] truncate hidden md:block">
+            <h3 className="font-medium text-[#222222] text-[14px] truncate hidden md:block">
                {user.email}
             </h3>
 
             {/* First Name - visible on lg and above */}
-            <h3 className={`font-medium text-[14px] truncate hidden lg:block`}>
+            <h3
+               className={`text-[14px] truncate hidden lg:block ${
+                  user.firstName
+                     ? "font-medium text-[#222222]"
+                     : "font-normal text-gray-400"
+               }`}
+            >
                {user.firstName ?? "not set"}
             </h3>
 
             {/* Last Name - visible on lg and above */}
-            <h3 className="font-medium text-[14px] truncate hidden lg:block">
+            <h3
+               className={`text-[14px] truncate hidden lg:block ${
+                  user.lastName
+                     ? "font-medium text-[#222222]"
+                     : "font-normal text-gray-400"
+               }`}
+            >
                {user.lastName ?? "not set"}
             </h3>
 
@@ -56,7 +68,11 @@ const UserCard = ({ user, location, getAllUsers }) => {
             <h3 className="font-medium text-[14px] truncate">{user.role}</h3>
 
             {/* Status - visible on lg and above */}
-            <h3 className="font-medium text-[14px] truncate hidden lg:block">
+            <h3
+               className={`font-medium text-[14px] truncate hidden lg:block ${
+                  user.status === "Verified" ? "text-green-500" : "text-red-500"
+               }`}
+            >
                {user.status}
             </h3>
 
