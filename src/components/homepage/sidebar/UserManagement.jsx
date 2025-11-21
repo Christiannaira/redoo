@@ -20,8 +20,10 @@ const UserManagement = () => {
    }
 
    return (
-      <div className="p-5">
-         <h2>User Management</h2>
+      <div className="p-4">
+         <h2 className="text-4xl font-medium text-[#444444]">
+            User Management
+         </h2>
          <div className="bg-white p-5 rounded-sm mt-5">
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 px-3">
                <h3 className="text-[14px] font-medium truncate">Username</h3>

@@ -8,6 +8,7 @@ import { PiUsers, PiBooks } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { listUsers, userCount } from "../../../services/UserServices";
+import { listBooks, bookCount } from "../../../services/BooksServices";
 import UserCard from "./cards/UserCard";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
@@ -15,6 +16,9 @@ const Dashboard = () => {
    const [users, setUsers] = useState([]);
    const { setActiveSection } = useOutletContext();
    const [count, setCount] = useState(0);
+
+   const [books, setBooks] = useState([]);
+   const [bookCounts, setBookCounts] = useState(0);
 
    const navigator = useNavigate();
 
@@ -26,6 +30,8 @@ const Dashboard = () => {
    useEffect(() => {
       getAllUsers();
       getUserCount();
+      getAllBooks();
+      getBookCount();
    }, []);
 
    function getAllUsers() {
@@ -41,6 +47,23 @@ const Dashboard = () => {
    const getUserCount = () => {
       userCount()
          .then((res) => setCount(res.data))
+         .catch((err) => console.error(err));
+   };
+
+   function getAllBooks() {
+      listBooks()
+         .then((response) => {
+            setBooks(response.data);
+            console.log(response);
+         })
+         .catch((error) => {
+            console.error(error);
+         });
+   }
+
+   const getBookCount = () => {
+      bookCount()
+         .then((res) => setBookCounts(res.data))
          .catch((err) => console.error(err));
    };
 
@@ -101,10 +124,10 @@ const Dashboard = () => {
                   </div>
                   <div>
                      <span className="text-sm font-medium text-gray-400">
-                        Total Borrowed Books
+                        Total Books - Not Borrowed
                      </span>
                      <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-700">
-                        130
+                        {bookCounts}
                      </h3>
                   </div>
                </div>
