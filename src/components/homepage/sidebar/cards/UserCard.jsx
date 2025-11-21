@@ -10,7 +10,7 @@ const UserCard = ({ user, location, getAllUsers }) => {
 
    const handleUser = (user) => {
       alert(user.username);
-      navigator("/userprofile", { state: user });
+      navigator("profile", { state: user });
    };
 
    const removeUser = (userId) => {
@@ -42,7 +42,6 @@ const UserCard = ({ user, location, getAllUsers }) => {
                {user.email}
             </h3>
 
-            {/* First Name - visible on lg and above */}
             <h3
                className={`text-[14px] truncate hidden lg:block ${
                   user.firstName
@@ -53,7 +52,6 @@ const UserCard = ({ user, location, getAllUsers }) => {
                {user.firstName ?? "not set"}
             </h3>
 
-            {/* Last Name - visible on lg and above */}
             <h3
                className={`text-[14px] truncate hidden lg:block ${
                   user.lastName
@@ -64,10 +62,8 @@ const UserCard = ({ user, location, getAllUsers }) => {
                {user.lastName ?? "not set"}
             </h3>
 
-            {/* Role - always visible */}
             <h3 className="font-medium text-[14px] truncate">{user.role}</h3>
 
-            {/* Status - visible on lg and above */}
             <h3
                className={`font-medium text-[14px] truncate hidden lg:block ${
                   user.status === "Verified" ? "text-green-500" : "text-red-500"
@@ -76,7 +72,6 @@ const UserCard = ({ user, location, getAllUsers }) => {
                {user.status}
             </h3>
 
-            {/* Date Created - visible on 2xl */}
             <h3 className="font-medium text-[14px] truncate hidden 2xl:block">
                {dateCreation.toLocaleDateString("en-US", {
                   year: "numeric",
@@ -85,7 +80,6 @@ const UserCard = ({ user, location, getAllUsers }) => {
                })}
             </h3>
 
-            {/* Trash Button - always in last column on xl and above */}
             <button
                className="flex items-center justify-center cursor-pointer text-red-500 hover:text-red-700 hidden xl:flex"
                onClick={(e) => {

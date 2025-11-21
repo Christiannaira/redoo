@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { listUsers } from "../../../services/UserServices";
 import UserCard from "./cards/UserCard";
+import Profile from "./cards/Profile";
 
 const UserManagement = () => {
    const [users, setUsers] = useState([]);
+   const [openUser, setOpenUser] = useState(false);
 
    useEffect(() => {
       getAllUsers();
@@ -17,6 +19,10 @@ const UserManagement = () => {
          .catch((error) => {
             console.error(error);
          });
+   }
+
+   if (openUser) {
+      return <Profile />;
    }
 
    return (

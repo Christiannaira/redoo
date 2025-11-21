@@ -21,7 +21,10 @@ function App() {
                <Route path="/signin" element={<SignIn />} />
                <Route path="/dashboard" element={<DashboardLayout />}>
                   <Route index element={<Dashboard />} />
-                  <Route path="user-management" element={<UserManagement />} />
+                  <Route path="user-management">
+                     <Route index element={<UserManagement />} />
+                     <Route path="profile" element={<UserProfileCard />} />
+                  </Route>
                   <Route
                      path="books-management"
                      element={<BooksManagement />}
@@ -31,7 +34,7 @@ function App() {
                   <Route path="approval" element={<Approval />} />
                </Route>
                <Route path="/settings" element={<Settings />} />
-               <Route path="/userprofile" element={<UserProfileCard />} />
+               {/* <Route path="/userprofile" element={<UserProfileCard />} /> */}
             </Routes>
          </BrowserRouter>
       </div>
