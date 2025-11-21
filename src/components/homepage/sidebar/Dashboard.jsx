@@ -127,7 +127,7 @@ const Dashboard = () => {
                </div>
                <div className="mt-2">
                   {users.map((user, key) => (
-                     <UserCard user={user} key={key} />
+                     <UserCard user={user} key={key} location />
                   ))}
                </div>
             </div>
