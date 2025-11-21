@@ -45,7 +45,7 @@ const UserManagement = () => {
                   Date Created
                </h3>
 
-               <h3 className="text-[14px] font-medium truncate hidden xl:block">
+               <h3 className="text-[14px] font-medium truncate hidden xl:block text-center">
                   Remove User
                </h3>
             </div>
