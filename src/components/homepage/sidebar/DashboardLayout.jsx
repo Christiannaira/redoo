@@ -5,7 +5,13 @@ import Navbar from "../Navbar";
 
 const DashboardLayout = () => {
    const [sideOpen, setSideOpen] = useState(true);
-   const [activeSection, setActiveSection] = useState("dashboard");
+   const [activeSection, setActiveSection] = useState(() => {
+      return localStorage.getItem("activeSection") || "dashboard";
+   });
+
+   useEffect(() => {
+      localStorage.setItem("activeSection", activeSection);
+   }, [activeSection]);
 
    return (
       <div>

@@ -17,9 +17,19 @@ const Dashboard = () => {
 
    const navigator = useNavigate();
 
-   const handleViewClick = () => {
-      navigator("/dashboard/user-management");
-      setActiveSection("user-management");
+   const handleViewClick = (type) => {
+      switch (type) {
+         case "user-management":
+            navigator("/dashboard/user-management");
+            setActiveSection("user-management");
+            break;
+         case "books-management":
+            navigator("/dashboard/books-management");
+            setActiveSection("books-management");
+            break;
+         default:
+            return;
+      }
    };
 
    useEffect(() => {
@@ -138,7 +148,7 @@ const Dashboard = () => {
                   </h3>
                   <span
                      className="font-medium text-[#FF6927] text-xl cursor-pointer hidden md:block"
-                     onClick={handleViewClick}
+                     onClick={() => handleViewClick("user-management")}
                   >
                      View All
                   </span>
@@ -165,9 +175,12 @@ const Dashboard = () => {
                         <h3 className="font-bold text-1xl md:text-2xl lg:text-3xl">
                            All Books
                         </h3>
-                        <Link className="font-medium text-[#FF6927] text-xl  hidden md:block">
+                        <span
+                           className="font-medium text-[#FF6927] text-xl cursor-pointer hidden md:block"
+                           onClick={() => handleViewClick("books-management")}
+                        >
                            View All
-                        </Link>
+                        </span>
                      </div>
                      <div className="mt-5 flex justify-between items-center">
                         <h3 className="text-1xl lg:text-2xl font-medium text-[#333333]">
