@@ -20,11 +20,6 @@ const SignUp = () => {
    const handleSignUp = (e) => {
       e.preventDefault();
 
-      const newEntry = {
-         username,
-         password,
-      };
-
       navigator("/dashboard");
    };
 

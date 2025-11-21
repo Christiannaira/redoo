@@ -18,30 +18,51 @@ const SignUp = () => {
 
    const navigator = useNavigate();
 
+   // function navigates to signin
    const toSignIn = () => {
       navigator("/signin");
    };
 
+   // function for signing up (the database function is included)
    const handleSignUp = (e) => {
       e.preventDefault();
 
-      const newEntry = {
-         username,
-         email,
-         password,
-         confirmPassword,
-      };
+      if (validateForm()) {
+         const newEntry = {
+            username,
+            email,
+            password,
+            confirmPassword,
+         };
 
-      console.log(newEntry);
+         console.log(newEntry);
 
-      createUser(newEntry)
-         .then((response) => {
-            console.log(response);
-            navigator("/dashboard");
-         })
-         .catch((error) => {
-            console.error(error);
-         });
+         createUser(newEntry)
+            .then((response) => {
+               console.log(response);
+               navigator("/dashboard");
+            })
+            .catch((error) => {
+               console.error(error);
+            });
+      }
+   };
+
+   // filtering signup forms
+   const validateForm = () => {
+      if (
+         username === "" ||
+         email === "" ||
+         password === "" ||
+         confirmPassword === ""
+      ) {
+         alert("field must no be empty");
+      } else {
+         if (password === confirmPassword) {
+            return true;
+         }
+         alert("Your password does not match");
+      }
    };
 
    return (
