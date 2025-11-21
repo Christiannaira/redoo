@@ -36,25 +36,6 @@ const Dashboard = () => {
          });
    }
 
-   // const dummyAccounts = [
-   //    { username: "Christian Naira", date: "11/15/2025" },
-   //    { username: "Zaid Competente", date: "11/15/2025" },
-   //    { username: "Laurence Gomez", date: "11/14/2025" },
-   //    { username: "Nazh Abadeza", date: "11/13/2025" },
-   //    { username: "Dominique Jao", date: "11/13/2025" },
-   //    { username: "Prince Jamil Romero", date: "11/10/2025" },
-   //    { username: "John Expie Berjuega", date: "11/10/2025" },
-   //    { username: "Arn Gile", date: "11/09/2025" },
-   //    { username: "Christian Naira", date: "11/15/2025" },
-   //    { username: "Zaid Competente", date: "11/15/2025" },
-   //    { username: "Laurence Gomez", date: "11/14/2025" },
-   //    { username: "Nazh Abadeza", date: "11/13/2025" },
-   //    { username: "Dominique Jao", date: "11/13/2025" },
-   //    { username: "Prince Jamil Romero", date: "11/10/2025" },
-   //    { username: "John Expie Berjuega", date: "11/10/2025" },
-   //    { username: "Arn Gile", date: "11/09/2025" },
-   // ];
-
    const dummyBooks = [
       { title: "Harry Potter", author: "J.K Rowling" },
       { title: "Harry Potter", author: "J.K Rowling" },
@@ -72,68 +53,79 @@ const Dashboard = () => {
       <div className="p-4">
          <h1 className="text-4xl font-medium text-[#444444]">Dashboard</h1>
          <div className="bg-white p-5 rounded-sm my-5 w-full">
-            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3">
-               <div className="flex items-center gap-3 relative">
-                  <div className="xl:h-full xl:w-1 xl:bg-gray-900/5 xl:top-0 xl:right-30 xl:absolute xl:rounded-full" />
-                  <div className="w-25 h-25 rounded-full bg-gradient-to-b from-orange-400 to-white flex items-center justify-center">
-                     <PiUsers size={35} color="#fff" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+               {/* Total Users */}
+               <div className="flex items-center gap-4 relative">
+                  <div className="hidden xl:block absolute top-0 right-0 h-full w-1 bg-gray-900/5 rounded-full" />
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-b from-orange-400 to-white flex items-center justify-center shadow">
+                     <PiUsers size={30} color="#fff" />
                   </div>
                   <div>
                      <span className="text-sm font-medium text-gray-400">
                         Total Users
                      </span>
-                     <h3 className="text-5xl font-bold text-gray-700">300</h3>
+                     <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-700">
+                        300
+                     </h3>
                   </div>
                </div>
 
-               <div className="flex items-center gap-3 relative">
-                  <div className="xl:h-full xl:w-1 xl:bg-gray-900/5 xl:top-0 xl:right-30 xl:absolute xl:rounded-full" />
-                  <div className="w-25 h-25 rounded-full bg-gradient-to-b from-orange-400 to-white flex items-center justify-center">
-                     <MdOutlineVerified size={35} color="#fff" />
+               {/* Verified Users */}
+               <div className="flex items-center gap-4 relative">
+                  <div className="hidden xl:block absolute top-0 right-0 h-full w-1 bg-gray-900/5 rounded-full" />
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-b from-orange-400 to-white flex items-center justify-center shadow">
+                     <MdOutlineVerified size={30} color="#fff" />
                   </div>
                   <div>
                      <span className="text-sm font-medium text-gray-400">
                         Verified Users
                      </span>
-                     <h3 className="text-5xl font-bold text-gray-700">150</h3>
+                     <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-700">
+                        150
+                     </h3>
                   </div>
                </div>
-               <div className="flex items-center gap-3 relative">
-                  <div className="w-25 h-25 rounded-full bg-gradient-to-b from-orange-400 to-white flex items-center justify-center">
-                     <PiBooks size={35} color="#fff" />
-                  </div>
 
+               {/* Borrowed Books */}
+               <div className="flex items-center gap-4 relative">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-b from-orange-400 to-white flex items-center justify-center shadow">
+                     <PiBooks size={30} color="#fff" />
+                  </div>
                   <div>
                      <span className="text-sm font-medium text-gray-400">
                         Total Borrowed Books
                      </span>
-                     <h3 className="text-5xl font-bold text-gray-700">130</h3>
+                     <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-700">
+                        130
+                     </h3>
                   </div>
                </div>
             </div>
          </div>
+
          <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 mt-3 min-h-screen">
             <div className="bg-white p-5 rounded-sm">
-               <div className="flex items-center justify-between">
-                  <h3 className="font-bold text-3xl">All Users</h3>
+               <div className="flex items-center justify-between relative md:pb-5 pb-2">
+                  <div className="absolute xl:w-50 lg:w-40 md:w-30 sm:w-20 h-1 bg-gray-200 bottom-[-8px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full" />
+                  <h3 className="font-bold text-1xl md:text-2xl lg:text-3xl">
+                     All Users
+                  </h3>
                   <span
-                     className="font-medium text-[#FF6927] text-xl cursor-pointer"
+                     className="font-medium text-[#FF6927] text-xl cursor-pointer hidden md:block"
                      onClick={handleViewClick}
                   >
                      View All
                   </span>
                </div>
-               <div className="mt-5">
-                  {/* {dummyAccounts.map((account, key) => (
-                     <div
-                        key={key}
-                        className="flex justify-between items-center bg-gray-200 mb-2 py-2 px-3 rounded-sm hover:bg-[#FF6927] cursor-pointer transition-full duration-200 ease-in-out"
-                        onClick={() => alert(account.username)}
-                     >
-                        <h3>{account.username}</h3>
-                        <span>{account.date}</span>
-                     </div>
-                  ))} */}
+               <div className="mt-5 flex justify-between items-center">
+                  <h3 className="text-1xl lg:text-2xl font-medium text-[#333333]">
+                     Username
+                  </h3>
+                  <h3 className="text-1xl lg:text-2xl font-medium text-[#333333]">
+                     Joined Date
+                  </h3>
+               </div>
+               <div className="mt-2">
                   {users.map((user, key) => (
                      <UserCard user={user} key={key} />
                   ))}
@@ -142,11 +134,22 @@ const Dashboard = () => {
             <div>
                <div>
                   <div className="bg-white p-5 rounded-sm">
-                     <div className="flex items-center justify-between">
-                        <h3 className="font-bold text-3xl">All Books</h3>
-                        <Link className="font-medium text-[#FF6927] text-xl">
+                     <div className="flex items-center justify-between relative md:pb-5 pb-2">
+                        <div className="absolute xl:w-50 lg:w-40 md:w-30 sm:w-20 h-1 bg-gray-200 bottom-[-8px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full" />
+                        <h3 className="font-bold text-1xl md:text-2xl lg:text-3xl">
+                           All Books
+                        </h3>
+                        <Link className="font-medium text-[#FF6927] text-xl  hidden md:block">
                            View All
                         </Link>
+                     </div>
+                     <div className="mt-5 flex justify-between items-center">
+                        <h3 className="text-1xl lg:text-2xl font-medium text-[#333333]">
+                           Book Title
+                        </h3>
+                        <h3 className="text-1xl lg:text-2xl font-medium text-[#333333]">
+                           Book Author
+                        </h3>
                      </div>
                      <div className="mt-5">
                         {dummyBooks.map((book, key) => (
