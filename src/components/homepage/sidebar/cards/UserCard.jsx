@@ -3,13 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
 import { deleteUser } from "../../../../services/UserServices";
 
-const UserCard = ({ user, location, getAllUsers }) => {
+const UserCard = ({ user, location, getAllUsers, setActiveSection }) => {
    const dateCreation = new Date(user.dateCreated);
 
    const navigator = useNavigate();
 
-   const handleUser = (user) => {
-      navigator(`profile/${user.id}`);
+   const handleUser = (user, page) => {
+      if (page === "user-management") {
+         navigator(`profile/${user.id}`);
+      } else if (page === "dashboard") {
+         navigator(`user-management/profile/${user.id}`);
+         setActiveSection("user-management");
+      }
    };
 
    const removeUser = (userId) => {
@@ -29,7 +34,7 @@ const UserCard = ({ user, location, getAllUsers }) => {
       return (
          <div
             className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 gap-2 text-[#222222] bg-gray-200 mb-2 py-2 px-3 rounded-sm hover:bg-[#FF6927] cursor-pointer transition-all duration-100 ease-out group hover:text-[#f7f7f7]"
-            onClick={() => handleUser(user)}
+            onClick={() => handleUser(user, "user-management")}
          >
             {/* Username - always visible */}
             <h3 className="font-medium text-[#222222] text-[14px] truncate">
@@ -95,7 +100,7 @@ const UserCard = ({ user, location, getAllUsers }) => {
    return (
       <div
          className="flex text-[#222222] justify-between items-center bg-gray-200 mb-2 py-2 px-3 rounded-sm hover:bg-[#FF6927] cursor-pointer transition-all duration-100 ease-out group hover:text-[#f7f7f7]"
-         onClick={() => handleUser(user)}
+         onClick={() => handleUser(user, "dashboard")}
       >
          <h3 className="font-medium text-1xl">{user.username}</h3>
          <span>

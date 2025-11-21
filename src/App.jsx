@@ -19,8 +19,12 @@ function App() {
             <Routes>
                <Route path="/signup" element={<SignUp />} />
                <Route path="/signin" element={<SignIn />} />
+
+               {/* Dashboard Route has nested path*/}
                <Route path="/dashboard" element={<DashboardLayout />}>
                   <Route index element={<Dashboard />} />
+
+                  {/* User Management Route has nested path*/}
                   <Route path="user-management">
                      <Route index element={<UserManagement />} />
                      <Route path="profile/:id" element={<UserProfileCard />} />
@@ -33,6 +37,7 @@ function App() {
                   <Route path="history" element={<History />} />
                   <Route path="approval" element={<Approval />} />
                </Route>
+
                <Route path="/settings" element={<Settings />} />
                {/* <Route path="/userprofile" element={<UserProfileCard />} /> */}
             </Routes>

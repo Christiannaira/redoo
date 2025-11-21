@@ -9,7 +9,7 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 
 const Dashboard = () => {
    const [users, setUsers] = useState([]);
-   const { setActiveSection } = useOutletContext();
+   const { activeSelection, setActiveSection } = useOutletContext();
    const [count, setCount] = useState(0);
 
    const [books, setBooks] = useState([]);
@@ -163,7 +163,12 @@ const Dashboard = () => {
                </div>
                <div className="mt-2">
                   {users.map((user, key) => (
-                     <UserCard user={user} key={key} location />
+                     <UserCard
+                        user={user}
+                        key={key}
+                        location={location}
+                        setActiveSection={setActiveSection}
+                     />
                   ))}
                </div>
             </div>
