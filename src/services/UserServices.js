@@ -12,3 +12,5 @@ export const getUser = (userId) => axios.get(REST_API_BASE_URL + "/" + userId);
 export const updateUser = (userId, user) => axios.put(REST_API_BASE_URL + "/" + userId, user);
 
 export const deleteUser = (userId) => axios.delete(REST_API_BASE_URL + "/" + userId);
+
+export const userCount = () => axios.get(REST_API_BASE_URL + "/count");

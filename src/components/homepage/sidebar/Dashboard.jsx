@@ -7,13 +7,14 @@ import { MdOutlineVerified } from "react-icons/md";
 import { PiUsers, PiBooks } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { listUsers } from "../../../services/UserServices";
+import { listUsers, userCount } from "../../../services/UserServices";
 import UserCard from "./cards/UserCard";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
 const Dashboard = () => {
    const [users, setUsers] = useState([]);
    const { setActiveSection } = useOutletContext();
+   const [count, setCount] = useState(0);
 
    const navigator = useNavigate();
 
@@ -24,6 +25,7 @@ const Dashboard = () => {
 
    useEffect(() => {
       getAllUsers();
+      getUserCount();
    }, []);
 
    function getAllUsers() {
@@ -35,6 +37,12 @@ const Dashboard = () => {
             console.error(error);
          });
    }
+
+   const getUserCount = () => {
+      userCount()
+         .then((res) => setCount(res.data))
+         .catch((err) => console.error(err));
+   };
 
    const dummyBooks = [
       { title: "Harry Potter", author: "J.K Rowling" },
@@ -65,7 +73,7 @@ const Dashboard = () => {
                         Total Users
                      </span>
                      <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-700">
-                        300
+                        {count}
                      </h3>
                   </div>
                </div>
