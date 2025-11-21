@@ -1,8 +1,3 @@
-import UserManagement from "./UserManagement";
-import BooksManagement from "./BooksManagement";
-import BorrowBooks from "./Borrow";
-import History from "./History";
-import Approval from "./Approval";
 import { MdOutlineVerified } from "react-icons/md";
 import { PiUsers, PiBooks } from "react-icons/pi";
 import { Link } from "react-router-dom";
