@@ -24,29 +24,56 @@ const BooksManagement = () => {
          <h2 className="text-4xl font-medium text-[#444444]">
             Books Management
          </h2>
-         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2x:grid-cols-7 gap-3 mt-5">
+         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2x:grid-cols-7 gap-3 mt-5">
             {books.map((book, key) => (
-               <div className="bg-white gap-2 rounded-md p-3 flex flex-col items-center cursor-pointer">
+               <div className="bg-white gap-2 rounded-md p-3 flex flex-col items-left cursor-pointer">
                   <img
                      src={BooksPhoto}
                      alt={`${book.title} cover photo`}
-                     width={"130px"}
-                     className="inline-block cursor-pointer"
+                     className="inline-block cursor-pointer w-full"
                   />
-                  <h2 className="text-2xl ">{book.title}</h2>
-                  <h3 className="text-sm font-medium text-gray-[#aaaaaa]">
-                     by {book.author}
-                  </h3>
-                  <p className="text-center text-[14px]">{book.summary}</p>
-                  <p>{book.genre}</p>
-                  <p>{book.language}</p>
-                  <p>{book.numberOfPages}</p>
-                  <p>{book.copiesAvailable}</p>
-                  <p>{book.status}</p>
-                  <p>{book.tags[0]}</p>
-                  <p>{book.tags[1]}</p>
-                  <p>{book.tags[2]}</p>
-                  <p>{book.totalCopies}</p>
+                  <div className="px-2">
+                     <h2 className="text-[20px] truncate font-medium">
+                        {book.title}
+                     </h2>
+                     <h3 className="text-sm font-regular text-[#A9A9A9]">
+                        by {book.author}
+                     </h3>
+                     <div className="mt-2">
+                        <div className="flex justify-between">
+                           <h3 className="text-md font-medium text-[#515151]">
+                              Copies Available
+                           </h3>
+                           <span className="text-md font-bold text-[#FD7C43]">
+                              {book.copiesAvailable
+                                 ? book.copiesAvailable
+                                 : "-"}
+                           </span>
+                        </div>
+                        <div className="flex justify-between">
+                           <h3 className="text-md font-medium text-[#515151]">
+                              Total Copies
+                           </h3>
+                           <span className="text-md font-bold text-[#FD7C43]">
+                              {book.totalCopies ? book.totalCopies : "-"}
+                           </span>
+                        </div>
+                        <div className="flex justify-between">
+                           <h3 className="text-md font-medium text-[#515151]">
+                              Status
+                           </h3>
+                           <span
+                              className={`text-md font-regular ${
+                                 book.status === "Available"
+                                    ? "text-green-600"
+                                    : "text-red-600"
+                              }`}
+                           >
+                              {book.status ? book.status : "-"}
+                           </span>
+                        </div>
+                     </div>
+                  </div>
                </div>
             ))}
          </div>
