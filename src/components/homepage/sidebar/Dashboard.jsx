@@ -130,7 +130,7 @@ const Dashboard = () => {
                   </div>
                   <div>
                      <span className="text-sm font-medium text-gray-400">
-                        Total Books - Not Borrowed
+                        Borrowed Books
                      </span>
                      <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-700">
                         {bookCounts}
@@ -156,10 +156,10 @@ const Dashboard = () => {
                </div>
 
                <div className="mt-5 flex justify-between items-center">
-                  <h3 className="text-1xl font-medium text-[#A9A9A9]">
+                  <h3 className="text-1xl font-medium text-[#A9A9A9] truncate">
                      Username
                   </h3>
-                  <h3 className="text-1xl font-medium text-[#A9A9A9]">
+                  <h3 className="text-1xl font-medium text-[#A9A9A9] truncate">
                      Joined Date
                   </h3>
                </div>
@@ -191,10 +191,10 @@ const Dashboard = () => {
                      </div>
 
                      <div className="mt-5 flex justify-between items-center">
-                        <h3 className="text-1xl font-medium text-[#A9A9A9]">
+                        <h3 className="text-1xl font-medium text-[#A9A9A9] truncate">
                            Book Title
                         </h3>
-                        <h3 className="text-1xl font-medium text-[#A9A9A9]">
+                        <h3 className="text-1xl font-medium text-[#A9A9A9] truncate">
                            Book Author
                         </h3>
                      </div>

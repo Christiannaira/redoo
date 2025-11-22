@@ -38,11 +38,11 @@ const BookCard = ({ book, location, setActiveSection, index }) => {
    if (location === "books-management-dashboard") {
       return (
          <div
-            className="flex justify-between items-center bg-gray-200 mb-2 py-2 px-3 rounded-sm hover:bg-[#FF6927] cursor-pointer transition-full duration-200 ease-in-out"
+            className="flex text-[#222222] justify-between items-center bg-gray-200 mb-2 py-2 px-3 rounded-sm hover:bg-[#FF6927] cursor-pointer transition-all duration-100 ease group hover:text-[#f7f7f7]"
             onClick={() => handleBook(book, "books-management-dashboard")}
          >
-            <h3>{book.title}</h3>
-            <span>{book.author}</span>
+            <h3 className="font-medium text-1xl">{book.title}</h3>
+            <span className="font-medium">{book.author}</span>
          </div>
       );
    }

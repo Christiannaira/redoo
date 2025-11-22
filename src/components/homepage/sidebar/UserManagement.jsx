@@ -21,11 +21,11 @@ const UserManagement = () => {
 
    return (
       <div className="p-4">
-         <h2 className="text-4xl font-medium text-[#444444]">
+         <h2 className="text-4xl font-medium text-[#444444] truncate">
             User Management
          </h2>
          <div className="bg-white p-5 rounded-sm mt-5">
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 px-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 px-3">
                <h3 className="text-[14px] font-medium truncate text-[#A9A9A9]">
                   Username
                </h3>
@@ -38,7 +38,7 @@ const UserManagement = () => {
                <h3 className="text-[14px] font-medium truncate text-[#A9A9A9] hidden lg:block">
                   Last Name
                </h3>
-               <h3 className="text-[14px] font-medium truncate text-[#A9A9A9]">
+               <h3 className="text-[14px] font-medium truncate text-[#A9A9A9] hidden sm:block">
                   Role
                </h3>
                <h3 className="text-[14px] font-medium truncate text-[#A9A9A9] hidden lg:block">

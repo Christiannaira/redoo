@@ -33,24 +33,22 @@ const UserCard = ({ user, location, getAllUsers, setActiveSection }) => {
    if (location === "user-management") {
       return (
          <div
-            className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 gap-2 text-[#222222] bg-gray-200 mb-2 py-2 px-3 rounded-sm hover:bg-[#FF6927] cursor-pointer transition-all duration-100 ease-out group hover:text-[#f7f7f7]"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 gap-2 text-[#222222] bg-gray-200 mb-2 py-2 px-3 rounded-sm hover:bg-[#FF6927] cursor-pointer transition-all duration-100 ease-out group hover:text-[#f7f7f7]"
             onClick={() => handleUser(user, "user-management")}
          >
             {/* Username - always visible */}
-            <h3 className="font-medium text-[#222222] text-[14px] truncate">
+            <h3 className="font-medium text-[14px] truncate">
                {user.username}
             </h3>
 
             {/* Email - visible on md and above */}
-            <h3 className="font-medium text-[#222222] text-[14px] truncate hidden md:block">
+            <h3 className="font-medium text-[14px] truncate hidden md:block">
                {user.email}
             </h3>
 
             <h3
                className={`text-[14px] truncate hidden lg:block ${
-                  user.firstName
-                     ? "font-medium text-[#222222]"
-                     : "font-normal text-gray-400"
+                  user.firstName ? "font-medium" : "font-normal text-gray-400"
                }`}
             >
                {user.firstName ?? "not set"}
@@ -58,15 +56,15 @@ const UserCard = ({ user, location, getAllUsers, setActiveSection }) => {
 
             <h3
                className={`text-[14px] truncate hidden lg:block ${
-                  user.lastName
-                     ? "font-medium text-[#222222]"
-                     : "font-normal text-gray-400"
+                  user.lastName ? "font-medium" : "font-normal text-gray-400"
                }`}
             >
                {user.lastName ?? "not set"}
             </h3>
 
-            <h3 className="font-medium text-[14px] truncate">{user.role}</h3>
+            <h3 className="font-medium text-[14px] truncate hidden sm:block">
+               {user.role}
+            </h3>
 
             <h3
                className={`font-medium text-[14px] truncate hidden lg:block ${
@@ -102,8 +100,8 @@ const UserCard = ({ user, location, getAllUsers, setActiveSection }) => {
          className="flex text-[#222222] justify-between items-center bg-gray-200 mb-2 py-2 px-3 rounded-sm hover:bg-[#FF6927] cursor-pointer transition-all duration-100 ease group hover:text-[#f7f7f7]"
          onClick={() => handleUser(user, "dashboard")}
       >
-         <h3 className="font-medium text-1xl">{user.username}</h3>
-         <span className="font-medium">
+         <h3 className="font-medium text-1xl truncate">{user.username}</h3>
+         <span className="font-medium truncate">
             {dateCreation.toLocaleDateString("en-US", {
                year: "numeric",
                month: "short",
