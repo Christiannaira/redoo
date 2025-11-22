@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { listBooks } from "../../../services/BooksServices";
 import BookCard from "./cards/BookCard";
+import { useOutletContext } from "react-router-dom";
 
 const BooksManagement = () => {
    const [books, setBooks] = useState([]);
+   const { activeSelection, setActiveSection } = useOutletContext();
 
    useEffect(() => {
       getAllBooks();
@@ -25,12 +27,13 @@ const BooksManagement = () => {
             Books Management
          </h2>
          <div className="max-[500px]:grid-cols-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2x:grid-cols-7 gap-3 mt-5">
-            {books.map((book, key) => (
+            {books.map((book, index) => (
                <BookCard
                   book={book}
-                  key={key}
                   location={"books-management"}
-                  index={key}
+                  setActiveSection={setActiveSection}
+                  index={index}
+                  key={book.id}
                />
             ))}
          </div>

@@ -13,8 +13,13 @@ import BooksEight from "../../../../assets/lecturephysics.jpg";
 const BookCard = ({ book, location, setActiveSection, index }) => {
    const navigate = useNavigate();
 
-   const handleBook = () => {
-      navigate(`book/${book.id}`);
+   const handleBook = (book, page) => {
+      if (page === "books-management") {
+         navigate(`book/${book.id}`);
+      } else if (page === "books-management-dashboard") {
+         navigate(`books-management/book/${book.id}`);
+         setActiveSection("books-management");
+      }
    };
 
    const booksLocalCover = [
@@ -30,11 +35,23 @@ const BookCard = ({ book, location, setActiveSection, index }) => {
       BooksOne,
    ];
 
+   if (location === "books-management-dashboard") {
+      return (
+         <div
+            className="flex justify-between items-center bg-gray-200 mb-2 py-2 px-3 rounded-sm hover:bg-[#FF6927] cursor-pointer transition-full duration-200 ease-in-out"
+            onClick={() => handleBook(book, "books-management-dashboard")}
+         >
+            <h3>{book.title}</h3>
+            <span>{book.author}</span>
+         </div>
+      );
+   }
+
    return (
       <div>
          <div
             className="max-[500px]:flex-row  max-[500px]:items-center bg-white gap-2 rounded-md p-3 flex flex-col items-left cursor-pointer truncate"
-            onClick={handleBook}
+            onClick={() => handleBook(book, "books-management")}
          >
             <img
                src={booksLocalCover[index]}

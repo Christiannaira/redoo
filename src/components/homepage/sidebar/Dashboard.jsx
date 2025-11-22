@@ -6,6 +6,7 @@ import { listUsers, userCount } from "../../../services/UserServices";
 import { listBooks, bookCount } from "../../../services/BooksServices";
 import UserCard from "./cards/UserCard";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import BookCard from "./cards/BookCard";
 
 const Dashboard = () => {
    const [users, setUsers] = useState([]);
@@ -153,11 +154,12 @@ const Dashboard = () => {
                      View All
                   </span>
                </div>
+
                <div className="mt-5 flex justify-between items-center">
-                  <h3 className="text-1xl lg:text-2xl font-medium text-[#333333]">
+                  <h3 className="text-1xl font-medium text-[#A9A9A9]">
                      Username
                   </h3>
-                  <h3 className="text-1xl lg:text-2xl font-medium text-[#333333]">
+                  <h3 className="text-1xl font-medium text-[#A9A9A9]">
                      Joined Date
                   </h3>
                </div>
@@ -187,24 +189,31 @@ const Dashboard = () => {
                            View All
                         </span>
                      </div>
+
                      <div className="mt-5 flex justify-between items-center">
-                        <h3 className="text-1xl lg:text-2xl font-medium text-[#333333]">
+                        <h3 className="text-1xl font-medium text-[#A9A9A9]">
                            Book Title
                         </h3>
-                        <h3 className="text-1xl lg:text-2xl font-medium text-[#333333]">
+                        <h3 className="text-1xl font-medium text-[#A9A9A9]">
                            Book Author
                         </h3>
                      </div>
-                     <div className="mt-5">
-                        {books.map((book, key) => (
-                           <div
-                              key={key}
-                              className="flex justify-between items-center bg-gray-200 mb-2 py-2 px-3 rounded-sm hover:bg-[#FF6927] cursor-pointer transition-full duration-200 ease-in-out"
-                              onClick={() => alert(book.title)}
-                           >
-                              <h3>{book.title}</h3>
-                              <span>{book.author}</span>
-                           </div>
+                     <div className="mt-2">
+                        {books.map((book, index) => (
+                           // <div
+                           //    className="flex justify-between items-center bg-gray-200 mb-2 py-2 px-3 rounded-sm hover:bg-[#FF6927] cursor-pointer transition-full duration-200 ease-in-out"
+                           //    onClick={() => alert(book.title)}
+                           // >
+                           //    <h3>{book.title}</h3>
+                           //    <span>{book.author}</span>
+                           // </div>
+                           <BookCard
+                              book={book}
+                              location={"books-management-dashboard"}
+                              setActiveSection={setActiveSection}
+                              index={index}
+                              key={book.id}
+                           />
                         ))}
                      </div>
                   </div>
