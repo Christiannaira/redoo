@@ -53,7 +53,7 @@ const Sidebar = ({
                            }
                         />
                         <h2
-                           className={`text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 ${
+                           className={`text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 truncate ${
                               activeSection === "dashboard"
                                  ? "text-[#FF6927]"
                                  : "text-[#222222]"
@@ -83,7 +83,7 @@ const Sidebar = ({
                            }
                         />
                         <h2
-                           className={`text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 ${
+                           className={`text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 truncate ${
                               activeSection === "user-management"
                                  ? "text-[#FF6927]"
                                  : "text-[#222222]"
@@ -113,7 +113,7 @@ const Sidebar = ({
                            }
                         />
                         <h2
-                           className={`text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 ${
+                           className={`text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 truncate ${
                               activeSection === "books-management"
                                  ? "text-[#FF6927]"
                                  : "text-[#222222]"
@@ -144,7 +144,7 @@ const Sidebar = ({
                         />
 
                         <h2
-                           className={`text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 ${
+                           className={`text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 truncate ${
                               activeSection === "borrows-book"
                                  ? "text-[#FF6927]"
                                  : "text-[#222222]"
@@ -173,7 +173,7 @@ const Sidebar = ({
                            }
                         />
                         <h2
-                           className={`text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 ${
+                           className={`text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 truncate ${
                               activeSection === "history"
                                  ? "text-[#FF6927]"
                                  : "text-[#222222]"
@@ -203,7 +203,7 @@ const Sidebar = ({
                            }
                         />
                         <h2
-                           className={`text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 ${
+                           className={`text-2xl font-medium group-hover:text-[#FF6927] transition duration-300 truncate ${
                               activeSection === "approval"
                                  ? "text-[#FF6927]"
                                  : "text-[#222222]"
