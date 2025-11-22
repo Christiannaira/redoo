@@ -1,9 +1,20 @@
 import BooksPhoto from "../../../../assets/booksPhoto.png";
+import { useNavigate } from "react-router-dom";
+import BookProfileCard from "./BookProfileCard";
 
-const BookCard = ({ book }) => {
+const BookCard = ({ book, location, setActiveSection }) => {
+   const navigate = useNavigate();
+
+   const handleBook = () => {
+      navigate(`book/${book.id}`);
+   };
+
    return (
       <div>
-         <div className="bg-white gap-2 rounded-md p-3 flex flex-col items-left cursor-pointer">
+         <div
+            className="bg-white gap-2 rounded-md p-3 flex flex-col items-left cursor-pointer"
+            onClick={handleBook}
+         >
             <img
                src={BooksPhoto}
                alt={`${book.title} cover photo`}

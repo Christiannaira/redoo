@@ -9,6 +9,7 @@ import History from "./components/homepage/sidebar/History";
 import Approval from "./components/homepage/sidebar/Approval";
 import Settings from "./components/homepage/sidebar/Settings";
 import UserProfileCard from "./components/homepage/sidebar/cards/UserProfileCard";
+import BookProfileCard from "./components/homepage/sidebar/cards/BookProfileCard";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -29,10 +30,13 @@ function App() {
                      <Route index element={<UserManagement />} />
                      <Route path="profile/:id" element={<UserProfileCard />} />
                   </Route>
-                  <Route
-                     path="books-management"
-                     element={<BooksManagement />}
-                  />
+
+                  {/* Book Management Route has nested path*/}
+                  <Route path="books-management">
+                     <Route index element={<BooksManagement />} />
+                     <Route path="book/:id" element={<BookProfileCard />} />
+                  </Route>
+
                   <Route path="borrow-books" element={<BorrowBooks />} />
                   <Route path="history" element={<History />} />
                   <Route path="approval" element={<Approval />} />
