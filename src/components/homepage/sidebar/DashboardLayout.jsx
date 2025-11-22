@@ -25,7 +25,7 @@ const DashboardLayout = () => {
          <div
             className={
                `bg-[#FAF7F5] min-h-screen transition-all duration-300 ease-in-out pt-[70px] ` +
-               (sideOpen ? "ml-[350px]" : "ml-[120px]")
+               (sideOpen ? "ml-[350px]" : "ml-[90px]")
             }
          >
             <Outlet context={{ activeSection, setActiveSection }} />

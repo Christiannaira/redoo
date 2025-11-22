@@ -24,9 +24,14 @@ const BooksManagement = () => {
          <h2 className="text-4xl font-medium text-[#444444]">
             Books Management
          </h2>
-         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2x:grid-cols-7 gap-3 mt-5">
+         <div className="max-[500px]:grid-cols-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2x:grid-cols-7 gap-3 mt-5">
             {books.map((book, key) => (
-               <BookCard book={book} key={key} location={"books-management"} />
+               <BookCard
+                  book={book}
+                  key={key}
+                  location={"books-management"}
+                  index={key}
+               />
             ))}
          </div>
          <div className="my-10 rounded-md bg-white p-1 inline-block">
