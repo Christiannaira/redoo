@@ -77,6 +77,31 @@ const BooksManagement = () => {
                </div>
             ))}
          </div>
+         <div className="my-10 rounded-md bg-white p-1 inline-block">
+            <div className="flex items-center gap-1">
+               <a className="inline-block font-medium text-[#515151] py-3 px-5 cursor-pointer hover:bg-[#FD7C43] transition-all duration-100 ease-out rounded-md hover:text-white bg-[#f7f7f7]">
+                  1
+               </a>
+               <a className="inline-block font-medium text-[#515151] py-3 px-5 cursor-pointer hover:bg-[#FD7C43] transition-all duration-100 ease-out rounded-md hover:text-white bg-[#f7f7f7]">
+                  2
+               </a>
+               <a className="inline-block font-medium text-[#515151] py-3 px-5 cursor-pointer hover:bg-[#FD7C43] transition-all duration-100 ease-out rounded-md hover:text-white bg-[#f7f7f7]">
+                  3
+               </a>
+               <a className="inline-block font-medium text-[#515151] py-3 px-5 cursor-pointer hover:bg-[#FD7C43] transition-all duration-100 ease-out rounded-md hover:text-white bg-[#f7f7f7]">
+                  4
+               </a>
+               <a className="inline-block font-medium text-[#515151] py-3 px-5 cursor-pointer hover:bg-[#FD7C43] transition-all duration-100 ease-out rounded-md hover:text-white bg-[#f7f7f7]">
+                  5
+               </a>
+               <a className="inline-block font-medium text-[#515151] py-3 px-5 cursor-pointer hover:bg-[#FD7C43] transition-all duration-100 ease-out rounded-md hover:text-white bg-[#f7f7f7]">
+                  6
+               </a>
+               <a className="inline-block font-medium text-[#515151] py-3 px-5 cursor-pointer hover:bg-[#FD7C43] transition-all duration-100 ease-out rounded-md hover:text-white bg-[#f7f7f7]">
+                  7
+               </a>
+            </div>
+         </div>
       </div>
    );
 };
