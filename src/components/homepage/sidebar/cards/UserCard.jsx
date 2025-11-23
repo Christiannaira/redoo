@@ -51,7 +51,7 @@ const UserCard = ({ user, location, getAllUsers, setActiveSection }) => {
                   user.firstName ? "font-medium" : "font-normal text-gray-400"
                }`}
             >
-               {user.firstName ?? "not set"}
+               {user.firstName ?? "-"}
             </h3>
 
             <h3
@@ -59,7 +59,7 @@ const UserCard = ({ user, location, getAllUsers, setActiveSection }) => {
                   user.lastName ? "font-medium" : "font-normal text-gray-400"
                }`}
             >
-               {user.lastName ?? "not set"}
+               {user.lastName ?? "-"}
             </h3>
 
             <h3 className="font-medium text-[14px] truncate hidden sm:block">

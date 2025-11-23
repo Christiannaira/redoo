@@ -3,6 +3,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { getUser, updateUser } from "../../../../services/UserServices";
 import { Link } from "react-router-dom";
 import DummyAvatar from "../../../../assets/dummyAvatar.png";
+import { MdArrowBackIos } from "react-icons/md";
 
 const UserProfileCard = () => {
    const { id } = useParams();
@@ -75,9 +76,17 @@ const UserProfileCard = () => {
 
    return (
       <div className="p-4">
-         <h2 className="text-4xl font-medium text-[#444444] truncate">
-            Edit Profile
-         </h2>
+         <div className="flex items-center">
+            <div>
+               <Link to={".."}>
+                  <MdArrowBackIos size={25} />
+               </Link>
+            </div>
+            <h2 className="ml-2 text-4xl font-medium text-[#444444] truncate">
+               Edit Profile
+            </h2>
+         </div>
+
          <div className="bg-white p-10 rounded-sm mt-5 min-h-screen relative flex flex-col">
             <div className="flex items-center gap-5 justify-left">
                <img
@@ -92,9 +101,9 @@ const UserProfileCard = () => {
                </h3>
             </div>
 
-            <div className="grid grid-cols-2 gap-5">
+            <div className="flex flex-col-reverse lg:grid lg:grid-cols-1 lg:grid-cols-2 gap-5">
                <div>
-                  <div className="grid  grid-cols-2 mt-5 gap-10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 mt-5 gap-4 md:gap-10">
                      <div>
                         <label
                            htmlFor="firstName"
@@ -193,7 +202,7 @@ const UserProfileCard = () => {
                      />
                   </div>
 
-                  <div className="grid grid-cols-2 mt-4 gap-10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 mt-4 gap-4 md:gap-10">
                      <div className="mt-2">
                         <label className="block font-medium text-[#515151]">
                            Sex
@@ -239,48 +248,48 @@ const UserProfileCard = () => {
                            onChange={(e) => setBirthDate(e.target.value)}
                         />
                      </div>
-                     <button
-                        onClick={handleSubmit}
-                        className="mt-3 bg-[#FF6927] cursor-pointer text-white font-medium px-6 py-3 rounded-md w-fit"
-                     >
-                        Save Changes
-                     </button>
                   </div>
+                  <button
+                     onClick={handleSubmit}
+                     className="mt-5 bg-[#FF6927] cursor-pointer text-white font-medium px-6 py-3 rounded-md w-full"
+                  >
+                     Save Changes
+                  </button>
                </div>
 
                <div className="p-5">
                   <div className="bg-[#f7f7f7] p-5 rounded-md grid grid-cols-2">
                      <div>
-                        <h3 className="block font-normal text-[#9C9C9C]">
+                        <h3 className="block font-normal text-[#9C9C9C] truncate">
                            Role
                         </h3>
-                        <h3 className="block font-normal text-[#9C9C9C]">
+                        <h3 className="block font-normal text-[#9C9C9C] truncate">
                            Status
                         </h3>
-                        <h3 className="block font-normal text-[#9C9C9C]">
+                        <h3 className="block font-normal text-[#9C9C9C] truncate">
                            Date Created
                         </h3>
-                        <h3 className="block font-normal text-[#9C9C9C]">
+                        <h3 className="block font-normal text-[#9C9C9C] truncate">
                            Borrowed Books
                         </h3>
-                        <h3 className="block font-normal text-[#9C9C9C]">
-                           ReferenceiD
+                        <h3 className="block font-normal text-[#9C9C9C] truncate">
+                           ReferenceID
                         </h3>
                         <a
                            href=""
-                           className="mt-5 inline-block text-[#5676F8] font-medium underline hover:text-[#113ADD]"
+                           className="mt-5 block text-[#5676F8] font-medium underline hover:text-[#113ADD] truncate"
                         >
                            Change Password
                         </a>
                      </div>
                      <div>
-                        <h2 className="block font-normal text-[#616161]">
+                        <h2 className="block font-normal text-[#616161] truncate">
                            {user.role}
                         </h2>
-                        <h2 className="block font-normal text-[#616161]">
+                        <h2 className="block font-normal text-[#616161] truncate">
                            {user.status}
                         </h2>
-                        <h2 className="block font-normal text-[#616161]">
+                        <h2 className="block font-normal text-[#616161] truncate">
                            {dateCreation
                               ? dateCreation.toLocaleDateString("en-US", {
                                    year: "numeric",
@@ -289,18 +298,16 @@ const UserProfileCard = () => {
                                 })
                               : "N/A"}
                         </h2>
-                        <h2 className="block font-normal text-[#616161]">
+                        <h2 className="block font-normal text-[#616161] truncate">
                            {user.booksBorrowed ? booksBorrowed : "0"}
                         </h2>
-                        <h2 className="block font-normal text-[#616161]">
+                        <h2 className="block font-normal text-[#616161] truncate">
                            {user.id}
                         </h2>
                      </div>
                   </div>
                </div>
             </div>
-
-            <Link to={".."}>Back</Link>
          </div>
       </div>
    );
