@@ -37,7 +37,7 @@ const UserProfileCard = () => {
             setSex(response.data.sex);
 
             if (response.data.birthDate) {
-               const date = new Date(data.birthDate);
+               const date = new Date(response.data.birthDate);
                const formattedDate = date.toISOString().split("T")[0];
                setBirthDate(formattedDate);
             } else {
@@ -56,7 +56,7 @@ const UserProfileCard = () => {
          address,
          phoneNumber,
          sex,
-         birthDate,
+         dateOfBirth: birthDate,
       };
 
       updateUser(id, updatedUser)
@@ -86,7 +86,9 @@ const UserProfileCard = () => {
                   className="inline-block w-30 h-30"
                />
                <h3 className="font-medium text-3xl text-[#515151]">
-                  {user.username}
+                  {user.firstName && user.lastName
+                     ? `${user.firstName} ${user.lastName}`
+                     : user.username}
                </h3>
             </div>
 
@@ -239,7 +241,7 @@ const UserProfileCard = () => {
                      </div>
                      <button
                         onClick={handleSubmit}
-                        className="mt-3 bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-md w-fit"
+                        className="mt-3 bg-[#FF6927] cursor-pointer text-white font-medium px-6 py-3 rounded-md w-fit"
                      >
                         Save Changes
                      </button>
@@ -264,7 +266,10 @@ const UserProfileCard = () => {
                         <h3 className="block font-normal text-[#9C9C9C]">
                            ReferenceiD
                         </h3>
-                        <a href="" className="mt-5 inline-block">
+                        <a
+                           href=""
+                           className="mt-5 inline-block text-[#5676F8] font-medium underline hover:text-[#113ADD]"
+                        >
                            Change Password
                         </a>
                      </div>
