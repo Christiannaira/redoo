@@ -8,6 +8,8 @@ const UserManagement = () => {
    const [keyword, setKeyword] = useState("");
    const [results, setResults] = useState([]);
 
+   const [popUpUser, setPopUpUser] = useState(false);
+
    useEffect(() => {
       getAllUsers();
    }, []);
@@ -40,14 +42,51 @@ const UserManagement = () => {
          });
    }
 
+   const handleAddUser = () => {
+      setPopUpUser(!popUpUser);
+   };
+
    return (
       <div className="p-4">
+         <div
+            className={`fixed top-0 left-0 w-full h-full z-100 bg-[#222222]/20 ${
+               popUpUser ? "block" : "hidden"
+            }`}
+            onClick={handleAddUser}
+         >
+            {/* Add User Popup Section */}
+            <div className="w-200 p-5 fixed z-200 bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md">
+               <form>
+                  <div className="grid grid-cols-2">
+                     <div>
+                        <label htmlFor="" className="block">
+                           First Name
+                        </label>
+                        <input
+                           type="text"
+                           placeholder="Enter your first name"
+                        />
+                     </div>
+                     <div>
+                        <label htmlFor="" className="block">
+                           Last Name
+                        </label>
+                        <input type="text" placeholder="Enter your last name" />
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+
          <h2 className="text-4xl font-medium text-[#444444] truncate">
             User Management
          </h2>
          <div className="bg-white p-5 rounded-sm mt-5 h-screen relative flex flex-col">
-            <button className="px-5 py-3 bg-green-500 fixed bottom-10 right-10 rounded-sm cursor-pointer">
-               Add User
+            <button
+               className="px-5 py-3 w-35 max-w-full bg-[#FF6927] fixed bottom-10 right-10 rounded-sm cursor-pointer text-[#f7f7f7] font-medium z-300"
+               onClick={handleAddUser}
+            >
+               {popUpUser ? "Return" : "Add User"}
             </button>
             <div className="flex items-center bg-gray-100/50 rounded-md flex-row w-100 max-w-full rounded-md hover:w-full transition-all duration-200 ease self-end">
                <input
