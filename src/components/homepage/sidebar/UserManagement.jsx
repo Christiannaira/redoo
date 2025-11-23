@@ -6,6 +6,7 @@ import { MdArrowBackIos } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useOutletContext } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import UserPopup from "./cards/UserPopup";
 
 const UserManagement = () => {
    const [users, setUsers] = useState([]);
@@ -61,29 +62,14 @@ const UserManagement = () => {
                popUpUser ? "block" : "hidden"
             }`}
             onClick={handleAddUser}
+         ></div>
+         {/* Add User Popup Section */}
+         <div
+            className={`w-200 p-5 fixed z-200 bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md z-500 ${
+               popUpUser ? "block" : "hidden"
+            }`}
          >
-            {/* Add User Popup Section */}
-            <div className="w-200 p-5 fixed z-200 bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md">
-               <form>
-                  <div className="grid grid-cols-2">
-                     <div>
-                        <label htmlFor="" className="block">
-                           First Name
-                        </label>
-                        <input
-                           type="text"
-                           placeholder="Enter your first name"
-                        />
-                     </div>
-                     <div>
-                        <label htmlFor="" className="block">
-                           Last Name
-                        </label>
-                        <input type="text" placeholder="Enter your last name" />
-                     </div>
-                  </div>
-               </form>
-            </div>
+            <UserPopup />
          </div>
 
          <div className="flex items-center">

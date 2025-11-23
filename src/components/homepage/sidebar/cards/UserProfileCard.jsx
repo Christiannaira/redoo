@@ -9,6 +9,9 @@ const UserProfileCard = () => {
    const { id } = useParams();
    const [user, setUser] = useState(null);
 
+   const [updateChangesSaved, setUpdateChangesSaved] = useState(false);
+   const [updateChangesError, setUpdateChangesError] = useState(false);
+
    const dateCreation =
       user && user.dateCreated ? new Date(user.dateCreated) : null;
 
@@ -62,7 +65,7 @@ const UserProfileCard = () => {
 
       updateUser(id, updatedUser)
          .then(() => {
-            alert("User is updated Successfully! ");
+            setUpdateChangesSaved(true);
          })
          .catch((err) => {
             console.error(err);
@@ -255,6 +258,13 @@ const UserProfileCard = () => {
                   >
                      Save Changes
                   </button>
+                  <div
+                     className={`text-center p-5 text-green-500 font-medium mt-5 ${
+                        updateChangesSaved ? "block" : "hidden"
+                     }`}
+                  >
+                     Update Changed Successfully
+                  </div>
                </div>
 
                <div className="p-5">
