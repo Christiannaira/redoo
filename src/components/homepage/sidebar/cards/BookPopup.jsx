@@ -1,8 +1,26 @@
 import React, { useState } from "react";
 import { IoMdClose } from "react-icons/io";
-import Genre from "./booksInputFields/Genre";
+import InputOptions from "./booksInputFields/InputOptions";
+import Status from "./booksInputFields/Status";
+import Languages from "./booksInputFields/Languages";
 
 const BookPopup = ({ fetchBooks, setPopUpBook }) => {
+   const genreOptions = [
+      "Personal Development",
+      "Education",
+      "Health",
+      "Fitness",
+      "Science",
+      "Novel",
+      "Mathematics",
+      "Medicine",
+      "Law",
+   ];
+
+   const languageOptions = ["English", "Filipino", "Spanish"];
+
+   const statusOptions = ["Available", "Not Available for now"];
+
    return (
       <div>
          <form action="">
@@ -81,8 +99,10 @@ const BookPopup = ({ fetchBooks, setPopUpBook }) => {
                </div>
             </div>
 
-            <div>
-               <Genre />
+            <div className="grid grid-cols-3 gap-8 mt-2">
+               <InputOptions title={"Genre"} options={genreOptions} />
+               <InputOptions title={"Language"} options={languageOptions} />
+               <InputOptions title={"Status"} options={statusOptions} />
             </div>
          </form>
       </div>
