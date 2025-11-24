@@ -38,7 +38,7 @@ const BooksManagement = () => {
 
          {/* Add Book Popup Section */}
          <div
-            className={`w-200 p-5 fixed z-200 bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md z-500 ${
+            className={`w-200 max-w-full p-5 fixed z-200 bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md z-500 ${
                popUpBook ? "block" : "hidden"
             }`}
          >

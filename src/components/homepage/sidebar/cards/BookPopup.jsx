@@ -3,6 +3,7 @@ import { IoMdClose } from "react-icons/io";
 import InputOptions from "./booksInputFields/InputOptions";
 import InputNumber from "./booksInputFields/InputNumber";
 import InputTags from "./booksInputFields/InputTags";
+import { addBook } from "../../../../services/BooksServices";
 
 const BookPopup = ({ fetchBooks, setPopUpBook }) => {
    const [title, setTitle] = useState("");
@@ -55,7 +56,47 @@ const BookPopup = ({ fetchBooks, setPopUpBook }) => {
          tags,
       };
 
-      console.log(newBookEntry);
+      addBook(newBookEntry)
+         .then((response) => {
+            console.log(response.data);
+            setTitle("");
+            setAuthor("");
+            setPublisher("");
+            setGenre("");
+            setCategory("");
+            setSummary("");
+            setLanguage("");
+            setStatus("");
+            setCopiesAvailable(null);
+            setTotalCopies(null);
+            setNumberOfPages(null);
+            setTags([]);
+            setDate("");
+         })
+         .catch((err) => console.error(err));
+   };
+
+   const [preview, setPreview] = useState(null);
+
+   const handleChange = (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      // Optional: check file type
+      if (!file.type.startsWith("image/")) {
+         alert("Please select an image file!");
+         return;
+      }
+
+      // Optional: limit file size to 5MB
+      const maxSize = 5 * 1024 * 1024;
+      if (file.size > maxSize) {
+         alert("File is too large. Max 5MB.");
+         return;
+      }
+
+      setVariable(file); // store the file in parent state
+      setPreview(URL.createObjectURL(file)); // show preview
    };
 
    return (
@@ -70,7 +111,7 @@ const BookPopup = ({ fetchBooks, setPopUpBook }) => {
                />
             </div>
             <div className="flex flex-col gap-4 mt-5">
-               <div className="grid grid-cols-2 gap-3">
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div>
                      <label
                         htmlFor="title"
@@ -106,7 +147,7 @@ const BookPopup = ({ fetchBooks, setPopUpBook }) => {
                      />
                   </div>
                </div>
-               <div className="grid grid-cols-2 gap-3">
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div>
                      <label
                         htmlFor="publisher"
@@ -202,13 +243,21 @@ const BookPopup = ({ fetchBooks, setPopUpBook }) => {
                   setVariable={setNumberOfPages}
                />
             </div>
+
             <div className="grid grid-cols-2 gap-5">
-               <div className="relative flex flex-col">
-                  <label className="font-medium mb-1">Publication Date</label>
+               <div className="relative flex flex-col mt-3">
+                  <label
+                     className="block font-medium text-[#515151] mb-2"
+                     htmlFor="date"
+                  >
+                     Publication Date
+                  </label>
 
                   <input
+                     id="date"
+                     name="date"
                      type="date"
-                     className="bg-gray-100/50 px-4 py-3 pr-10 rounded-md w-full"
+                     className="block bg-gray-100/50 px-4 py-3 rounded-md w-full mt-2"
                      value={date}
                      onChange={(e) => setDate(e.target.value)}
                   />
@@ -219,6 +268,33 @@ const BookPopup = ({ fetchBooks, setPopUpBook }) => {
                </div>
                <div>
                   <InputTags tags={tags} setTags={setTags} />
+               </div>
+            </div>
+            <div>
+               <div className="flex flex-col mt-3 w-64">
+                  <label className="font-medium text-gray-700 mb-2">
+                     {title}
+                  </label>
+
+                  <input
+                     type="file"
+                     accept="image/*"
+                     onChange={handleChange}
+                     className="block w-full text-sm text-gray-500
+                   file:mr-4 file:py-2 file:px-4
+                   file:rounded-md file:border-0
+                   file:text-sm file:font-semibold
+                   file:bg-blue-100 file:text-blue-700
+                   hover:file:bg-blue-200"
+                  />
+
+                  {preview && (
+                     <img
+                        src={preview}
+                        alt="Preview"
+                        className="mt-2 w-full h-48 object-cover rounded-md border"
+                     />
+                  )}
                </div>
             </div>
             <button

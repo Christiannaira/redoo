@@ -21,14 +21,14 @@ const InputTags = ({ tags, setTags }) => {
    };
 
    return (
-      <div>
-         <div className="p-4 w-full max-w-md">
-            <label className="block mb-2 text-gray-700 font-medium">
+      <div className="mt-3">
+         <div className="w-full max-w-md">
+            <label htmlFor="tags" className="block font-medium text-[#515151]">
                Add Tags:
             </label>
 
             {/* Tags container */}
-            <div className="flex flex-wrap items-center gap-2 p-2 border rounded bg-white">
+            <div className="flex flex-wrap items-center gap-2 p-2 rounded bg-gray-100/50 mt-4">
                {tags.map((tag) => (
                   <span
                      key={tag}
@@ -55,9 +55,9 @@ const InputTags = ({ tags, setTags }) => {
                />
             </div>
 
-            <p className="mt-3 text-sm">
+            {/* <p className="mt-3 text-sm">
                Tags: <strong>{tags.join(", ") || "None"}</strong>
-            </p>
+            </p> */}
          </div>
       </div>
    );
