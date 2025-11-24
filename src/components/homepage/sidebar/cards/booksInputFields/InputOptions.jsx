@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 
-const Genre = ({ title, options }) => {
+const Genre = ({ title, options, variable, setVariable }) => {
    const [query, setQuery] = useState("");
    const [selected, setSelected] = useState("");
    const [open, setOpen] = useState(false);
@@ -14,6 +14,7 @@ const Genre = ({ title, options }) => {
       setSelected(value);
       setQuery("");
       setOpen(false);
+      setVariable(value);
    };
 
    const containerRef = useRef(null);
@@ -32,15 +33,15 @@ const Genre = ({ title, options }) => {
    }, []);
 
    return (
-      <div>
+      <div className="mt-3">
          <div className="w-64 relative" ref={containerRef}>
             <label className="block font-medium text-[#515151]">{title}:</label>
 
-            <div className="relative flex items-center">
+            <div className="relative flex items-center inline-block">
                {/* Input Box */}
                <input
                   type="text"
-                  className="block bg-gray-100/50 px-4 py-3 rounded-md w-full mt-2"
+                  className="block bg-gray-100/50 px-4 py-3 rounded-md max-w-full mt-2"
                   placeholder="Search..."
                   value={query || selected}
                   onChange={(e) => {
@@ -84,9 +85,9 @@ const Genre = ({ title, options }) => {
                </ul>
             )}
 
-            <p className="mt-2 text-sm">
+            {/* <p className="mt-2 text-sm">
                Selected: <strong>{selected || "None"}</strong>
-            </p>
+            </p> */}
          </div>
       </div>
    );

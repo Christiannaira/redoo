@@ -1,10 +1,24 @@
 import React, { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import InputOptions from "./booksInputFields/InputOptions";
-import Status from "./booksInputFields/Status";
-import Languages from "./booksInputFields/Languages";
+import InputNumber from "./booksInputFields/InputNumber";
+import InputTags from "./booksInputFields/InputTags";
 
 const BookPopup = ({ fetchBooks, setPopUpBook }) => {
+   const [title, setTitle] = useState("");
+   const [author, setAuthor] = useState("");
+   const [publisher, setPublisher] = useState("");
+   const [genre, setGenre] = useState("");
+   const [category, setCategory] = useState("");
+   const [summary, setSummary] = useState("");
+   const [language, setLanguage] = useState("");
+   const [status, setStatus] = useState("");
+   const [copiesAvailable, setCopiesAvailable] = useState(null);
+   const [totalCopies, setTotalCopies] = useState(null);
+   const [numberOfPages, setNumberOfPages] = useState(null);
+   const [tags, setTags] = useState([]);
+   const [date, setDate] = useState("");
+
    const genreOptions = [
       "Personal Development",
       "Education",
@@ -21,9 +35,32 @@ const BookPopup = ({ fetchBooks, setPopUpBook }) => {
 
    const statusOptions = ["Available", "Not Available for now"];
 
+   const handleNewBookEntry = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const newBookEntry = {
+         title,
+         author,
+         publisher,
+         category,
+         summary,
+         date,
+         genre,
+         status,
+         language,
+         copiesAvailable,
+         totalCopies,
+         numberOfPages,
+         tags,
+      };
+
+      console.log(newBookEntry);
+   };
+
    return (
       <div>
-         <form action="">
+         <form onSubmit={handleNewBookEntry}>
             <div className="flex justify-between items-center">
                <h3 className="text-2xl font-bold">Add New Book</h3>
                <IoMdClose
@@ -46,6 +83,8 @@ const BookPopup = ({ fetchBooks, setPopUpBook }) => {
                         name="title"
                         type="text"
                         placeholder="Enter Book Title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
                         className="block bg-gray-100/50 px-4 py-3 rounded-md w-full mt-2"
                      />
                   </div>
@@ -61,6 +100,8 @@ const BookPopup = ({ fetchBooks, setPopUpBook }) => {
                         name="author"
                         type="text"
                         placeholder="Enter Book Author"
+                        value={author}
+                        onChange={(e) => setAuthor(e.target.value)}
                         className="block bg-gray-100/50 px-4 py-3 rounded-md w-full mt-2"
                      />
                   </div>
@@ -78,32 +119,114 @@ const BookPopup = ({ fetchBooks, setPopUpBook }) => {
                         name="publisher"
                         type="text"
                         placeholder="Enter Book Publisher"
+                        value={publisher}
+                        onChange={(e) => setPublisher(e.target.value)}
                         className="block bg-gray-100/50 px-4 py-3 rounded-md w-full mt-2"
                      />
                   </div>
                   <div>
                      <label
-                        htmlFor="genre"
+                        htmlFor="category"
                         className="block font-medium text-[#515151]"
                      >
-                        Genre
+                        Category
                      </label>
                      <input
-                        id="genre"
-                        name="genre"
+                        id="caterogy"
+                        name="caterogy"
                         type="text"
-                        placeholder="Enter Book Genre"
+                        placeholder="Enter Book Caterogy"
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
                         className="block bg-gray-100/50 px-4 py-3 rounded-md w-full mt-2"
                      />
                   </div>
                </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-8 mt-2">
-               <InputOptions title={"Genre"} options={genreOptions} />
-               <InputOptions title={"Language"} options={languageOptions} />
-               <InputOptions title={"Status"} options={statusOptions} />
+            <div className="mt-5">
+               <label
+                  htmlFor="summary"
+                  className="block font-medium text-[#515151]"
+               >
+                  Book Summary Description
+               </label>
+               <textarea
+                  name="summary"
+                  id="summary"
+                  className="block bg-gray-100/50 px-4 py-3 rounded-md w-full mt-2"
+                  value={summary}
+                  onChange={(e) => setSummary(e.target.value)}
+                  placeholder="Enter Book Description"
+               ></textarea>
             </div>
+
+            <div className="grid grid-cols-3 gap-5 mt-2">
+               <InputOptions
+                  title={"Genre"}
+                  options={genreOptions}
+                  variable={genre}
+                  setVariable={setGenre}
+               />
+               <InputOptions
+                  title={"Language"}
+                  options={languageOptions}
+                  variable={language}
+                  setVariable={setLanguage}
+               />
+               <InputOptions
+                  title={"Status"}
+                  options={statusOptions}
+                  variable={status}
+                  setVariable={setStatus}
+               />
+            </div>
+
+            <div className="grid grid-cols-3 gap-5 mt-2">
+               <InputNumber
+                  title={"Copies Available"}
+                  limit={20}
+                  variable={copiesAvailable}
+                  setVariable={setCopiesAvailable}
+               />
+               <InputNumber
+                  title={"Total Copies"}
+                  limit={30}
+                  variable={totalCopies}
+                  setVariable={setTotalCopies}
+               />
+               <InputNumber
+                  title={"Number Of Pages"}
+                  limit={5000}
+                  variable={numberOfPages}
+                  setVariable={setNumberOfPages}
+               />
+            </div>
+            <div className="grid grid-cols-2 gap-5">
+               <div className="relative flex flex-col">
+                  <label className="font-medium mb-1">Publication Date</label>
+
+                  <input
+                     type="date"
+                     className="bg-gray-100/50 px-4 py-3 pr-10 rounded-md w-full"
+                     value={date}
+                     onChange={(e) => setDate(e.target.value)}
+                  />
+
+                  <span className="absolute right-3 top-11 -translate-y-1/2 text-gray-500 pointer-events-none">
+                     📅
+                  </span>
+               </div>
+               <div>
+                  <InputTags tags={tags} setTags={setTags} />
+               </div>
+            </div>
+            <button
+               type="submit"
+               className="px-5 py-3 w-full max-w-full bg-[#FF6927] rounded-sm cursor-pointer text-[#f7f7f7] font-medium"
+            >
+               Add Book to the Collection
+            </button>
          </form>
       </div>
    );
