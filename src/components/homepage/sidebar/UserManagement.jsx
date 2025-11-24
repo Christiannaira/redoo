@@ -63,13 +63,14 @@ const UserManagement = () => {
             }`}
             onClick={handleAddUser}
          ></div>
+
          {/* Add User Popup Section */}
          <div
             className={`w-200 p-5 fixed z-200 bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md z-500 ${
                popUpUser ? "block" : "hidden"
             }`}
          >
-            <UserPopup />
+            <UserPopup fetchUsers={getAllUsers} setPopUpUser={setPopUpUser} />
          </div>
 
          <div className="flex items-center">
@@ -91,10 +92,11 @@ const UserManagement = () => {
          </div>
          <div className="bg-white p-5 rounded-sm mt-5 h-screen relative flex flex-col">
             <button
-               className="px-5 py-3 w-35 max-w-full bg-[#FF6927] fixed bottom-10 right-10 rounded-sm cursor-pointer text-[#f7f7f7] font-medium z-300"
+               className="px-5 py-3 w-35 max-w-full bg-[#FF6927] fixed bottom-10 right-10 rounded-sm cursor-pointer text-[#f7f7f7] font-medium"
                onClick={handleAddUser}
             >
-               {popUpUser ? "Return" : "Add User"}
+               {/* {popUpUser ? "Return" : "Add User"} */}
+               Add User
             </button>
             <div className="flex items-center bg-gray-100/50 rounded-md flex-row w-100 max-w-full rounded-md hover:w-full transition-all duration-200 ease self-end">
                <input
