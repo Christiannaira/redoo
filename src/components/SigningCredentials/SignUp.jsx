@@ -17,6 +17,7 @@ const SignUp = () => {
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
    const [confirmPassword, setConfirmPassword] = useState("");
+   const [role, setRole] = useState("");
 
    const navigator = useNavigate();
 
@@ -35,6 +36,7 @@ const SignUp = () => {
             email,
             password,
             confirmPassword,
+            role,
          };
 
          console.log(newEntry);
@@ -42,7 +44,7 @@ const SignUp = () => {
          createUser(newEntry)
             .then((response) => {
                console.log(response);
-               navigator("/dashboard");
+               navigator("/signin");
             })
             .catch((error) => {
                console.error(error);
@@ -177,15 +179,49 @@ const SignUp = () => {
                         />
                      )}
                   </div>
+
+                  <div className="mt-2">
+                     <label className="block font-medium text-[#515151]">
+                        Role
+                     </label>
+
+                     <div className="flex items-center gap-6 mt-2">
+                        <label className="flex items-center gap-2">
+                           <input
+                              type="radio"
+                              name="role"
+                              value="User"
+                              checked={role === "User"}
+                              onChange={(e) => setRole(e.target.value)}
+                           />
+                           User
+                        </label>
+
+                        <label className="flex items-center gap-2">
+                           <input
+                              type="radio"
+                              name="role"
+                              value="Admin"
+                              checked={role === "Admin"}
+                              onChange={(e) => setRole(e.target.value)}
+                           />
+                           Admin
+                        </label>
+                     </div>
+                  </div>
                </div>
-               <div className="h-10 p-2">
-                  <h3 className="font-medium text-red-500">{inputReminder}</h3>
+
+               <div className="h-10 p-2 mt-5">
+                  <h3 className="font-medium text-red-500">
+                     *{inputReminder}*
+                  </h3>
                </div>
+
                {/* BUTTON */}
             </form>
             <button
                type="submit"
-               className="bg-[#FF6927] hover:bg-[#ff7f45] transition text-white p-3 px-10 text-xl rounded-full max-w-[500px] w-full"
+               className="bg-[#FF6927] hover:bg-[#ff7f45] transition text-white p-3 px-10 text-xl rounded-full max-w-[500px] w-full mt-5"
                form="signupForm"
             >
                Sign Up

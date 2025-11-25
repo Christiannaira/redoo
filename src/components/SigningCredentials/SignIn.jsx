@@ -4,6 +4,7 @@ import { useState } from "react";
 import { GoArrowLeft } from "react-icons/go";
 import DummyImage from "../../assets/dummyImage.png";
 import { useNavigate } from "react-router-dom";
+import { loginAdmin, loginUser } from "../../services/UserServices";
 
 const SignUp = () => {
    const [passOpen, setPassOpen] = useState(false);
@@ -17,10 +18,21 @@ const SignUp = () => {
       navigator("/signup");
    };
 
-   const handleSignUp = (e) => {
+   const handleSignUp = async (e) => {
       e.preventDefault();
 
-      navigator("/dashboard");
+      try {
+         const response = await loginAdmin(username, password);
+
+         alert("Login Successful!");
+         navigator("/dashboard");
+      } catch (error) {
+         if (error.response && error.response.status === 401) {
+            alert("Invalid username or password");
+         } else {
+            alert("Server error");
+         }
+      }
    };
 
    return (

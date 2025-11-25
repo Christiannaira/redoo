@@ -18,3 +18,17 @@ export const userCount = () => axios.get(REST_API_BASE_URL + "/count");
 export const searchUser = (keyword) => axios.get(`${REST_API_BASE_URL}/search`, {
     params: {keyword: keyword},
 });;
+
+// for admin login
+export const loginAdmin = (usernameOrEmail, password) =>
+    axios.post(REST_API_BASE_URL + "/adminLogin", {
+        usernameOrEmail,
+        password,
+    });
+
+// for user login
+export const loginUser = (usernameOrEmail, password) =>
+    axios.post(REST_API_BASE_URL + "/userLogin", {
+        usernameOrEmail,
+        password,
+    });
