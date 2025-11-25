@@ -3,11 +3,19 @@ import { listBooks } from "../../../services/BooksServices";
 import BookCard from "./cards/BookCard";
 import { useOutletContext } from "react-router-dom";
 import BookPopup from "./cards/BookPopup";
+import { IoSearch } from "react-icons/io5";
 
 const BooksManagement = () => {
    const [books, setBooks] = useState([]);
    const { activeSelection, setActiveSection } = useOutletContext();
    const [popUpBook, setPopUpBook] = useState(false);
+
+   const [keyword, setKeyword] = useState("");
+   const [results, setResults] = useState([]);
+
+   const handleSearch = async (e) => {
+      alert("hello");
+   };
 
    useEffect(() => {
       getAllBooks();
@@ -28,7 +36,7 @@ const BooksManagement = () => {
    };
 
    return (
-      <div className="p-4">
+      <div className="p-4 flex flex-col">
          <div
             className={`fixed top-0 left-0 w-full h-full z-100 bg-[#222222]/20 ${
                popUpBook ? "block" : "hidden"
@@ -48,6 +56,21 @@ const BooksManagement = () => {
          <h2 className="text-4xl font-medium text-[#444444]">
             Books Management
          </h2>
+
+         <div className="flex items-center bg-gray-100/50 rounded-md flex-row w-100 max-w-full rounded-md hover:w-full transition-all duration-200 ease self-end">
+            <input
+               type="text"
+               placeholder="Search..."
+               className="flex-1 min-w-0 focus:outline-none py-3 px-5"
+            />
+            <button
+               className="rounded-tr-md rounded-br-md bg-[#333333] py-3 px-6 cursor-pointer transition-all duration-100 ease hover:bg-[#FF6927]"
+               onClick={handleSearch}
+            >
+               <IoSearch size={20} className="inline-block text-white" />
+            </button>
+         </div>
+
          <div className="max-[500px]:grid-cols-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2x:grid-cols-7 gap-3 mt-5">
             {books.map((book, index) => (
                <BookCard

@@ -10,7 +10,7 @@ import Approval from "./components/homepage/sidebar/Approval";
 import Settings from "./components/homepage/sidebar/Settings";
 import UserProfileCard from "./components/homepage/sidebar/cards/UserProfileCard";
 import BookProfileCard from "./components/homepage/sidebar/cards/BookProfileCard";
-
+import GettingStarted from "./components/SigningCredentials/GettingStarted";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -18,6 +18,7 @@ function App() {
       <div>
          <BrowserRouter>
             <Routes>
+               <Route path="/" element={<GettingStarted />} />
                <Route path="/signup" element={<SignUp />} />
                <Route path="/signin" element={<SignIn />} />
 
