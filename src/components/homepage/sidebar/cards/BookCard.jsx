@@ -54,7 +54,7 @@ const BookCard = ({ book, location, setActiveSection, index }) => {
             onClick={() => handleBook(book, "books-management")}
          >
             <img
-               src={booksLocalCover[index]}
+               src={book.coverImageUrl || book.coverImagUrl}
                alt={`${book.title} cover photo`}
                className="inline-block cursor-pointer w-[100px] sm:w-full h-70"
             />

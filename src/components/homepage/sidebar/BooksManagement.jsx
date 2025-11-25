@@ -28,6 +28,7 @@ const BooksManagement = ({ isLogin, setIsLogin }) => {
 
       searchBook(value)
          .then((response) => {
+            console.log(response.data);
             setResults(response.data);
          })
          .catch((err) => {

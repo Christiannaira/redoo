@@ -7,6 +7,7 @@ const UserPopup = ({ fetchUsers, setPopUpUser }) => {
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
    const [confirmPassword, setConfirmPassword] = useState("");
+   const [role, setRole] = useState("");
 
    const [fieldReminder, setFieldReminder] = useState("");
 
@@ -28,11 +29,13 @@ const UserPopup = ({ fetchUsers, setPopUpUser }) => {
                setFieldReminder("Your password doesn't match");
                setPassword("");
                setConfirmPassword("");
+               setRole("");
             } else {
                const userEntry = {
                   username,
                   email,
                   password,
+                  role,
                };
 
                createUser(userEntry)
@@ -99,6 +102,34 @@ const UserPopup = ({ fetchUsers, setPopUpUser }) => {
                      onChange={(e) => setEmail(e.target.value)}
                   />
                </div>
+               <div className="">
+                  <label className="block font-medium text-[#515151]">
+                     Role
+                  </label>
+                  <div className="flex items-center gap-6 mt-2">
+                     <label className="flex items-center gap-2">
+                        <input
+                           type="radio"
+                           name="role"
+                           value="User"
+                           checked={role === "User"}
+                           onChange={(e) => setRole(e.target.value)}
+                        />
+                        User
+                     </label>
+
+                     <label className="flex items-center gap-2">
+                        <input
+                           type="radio"
+                           name="role"
+                           value="Admin"
+                           checked={role === "Admin"}
+                           onChange={(e) => setRole(e.target.value)}
+                        />
+                        Admin
+                     </label>
+                  </div>
+               </div>
                <div>
                   <label
                      htmlFor="password"
@@ -134,7 +165,9 @@ const UserPopup = ({ fetchUsers, setPopUpUser }) => {
                   />
                </div>
                <div>
-                  <h3>{fieldReminder ? fieldReminder : ""}</h3>
+                  <h3 className="h-5 text-red-500 font-medium">
+                     {fieldReminder ? "*" + fieldReminder + "*" : ""}
+                  </h3>
                </div>
                <button
                   type="submit"

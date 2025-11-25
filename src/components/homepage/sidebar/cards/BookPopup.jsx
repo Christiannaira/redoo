@@ -5,6 +5,7 @@ import InputNumber from "./booksInputFields/InputNumber";
 import InputTags from "./booksInputFields/InputTags";
 import { addBook } from "../../../../services/BooksServices";
 import InputImage from "./booksInputFields/InputImage";
+import { supabase } from "../../../../supabase/supabaseClient";
 
 const BookPopup = ({ fetchBooks, setPopUpBook }) => {
    const [title, setTitle] = useState("");
@@ -20,6 +21,29 @@ const BookPopup = ({ fetchBooks, setPopUpBook }) => {
    const [numberOfPages, setNumberOfPages] = useState(null);
    const [tags, setTags] = useState([]);
    const [date, setDate] = useState("");
+
+   const [image, setImage] = useState(null);
+
+   const uploadImage = async () => {
+      if (!image) return null;
+
+      const fileName = `${Date.now()}-${image.name}`;
+
+      const { data, error } = await supabase.storage
+         .from("test")
+         .upload(fileName, image);
+
+      if (error) {
+         console.log("Upload error:", error);
+         return null;
+      }
+
+      const { data: publicUrlData } = supabase.storage
+         .from("test")
+         .getPublicUrl(fileName);
+
+      return publicUrlData.publicUrl; // ✅ return the URL
+   };
 
    const genreOptions = [
       "Personal Development",
@@ -37,17 +61,26 @@ const BookPopup = ({ fetchBooks, setPopUpBook }) => {
 
    const statusOptions = ["Available", "Not Available for now"];
 
-   const handleNewBookEntry = (e) => {
+   const handleNewBookEntry = async (e) => {
       e.preventDefault();
       e.stopPropagation();
 
+      // 1. Wait for upload
+      const imageUrl = await uploadImage();
+
+      if (!imageUrl) {
+         alert("Image upload failed!");
+         return;
+      }
+
+      // 2. Create payload using the returned URL
       const newBookEntry = {
          title,
          author,
          publisher,
          category,
          summary,
-         date,
+         publication_date: date,
          genre,
          status,
          language,
@@ -55,26 +88,31 @@ const BookPopup = ({ fetchBooks, setPopUpBook }) => {
          totalCopies,
          numberOfPages,
          tags,
+         coverImageUrl: imageUrl, // ✅ correct
       };
 
+      // 3. Save to database
       addBook(newBookEntry)
          .then((response) => {
             console.log(response.data);
-            setTitle("");
-            setAuthor("");
-            setPublisher("");
-            setGenre("");
-            setCategory("");
-            setSummary("");
-            setLanguage("");
-            setStatus("");
-            setCopiesAvailable(null);
-            setTotalCopies(null);
-            setNumberOfPages(null);
-            setTags([]);
-            setDate("");
+            fetchBooks(); // refresh UI
+            setPopUpBook(false);
          })
          .catch((err) => console.error(err));
+
+      setTitle("");
+      setAuthor("");
+      setPublisher("");
+      setGenre("");
+      setCategory("");
+      setSummary("");
+      setLanguage("");
+      setStatus("");
+      setCopiesAvailable(null);
+      setTotalCopies(null);
+      setNumberOfPages(null);
+      setTags([]);
+      setDate("");
    };
 
    return (
@@ -249,7 +287,7 @@ const BookPopup = ({ fetchBooks, setPopUpBook }) => {
                </div>
             </div>
             <div>
-               <InputImage />
+               <InputImage setImage={setImage} />
             </div>
             <button
                type="submit"

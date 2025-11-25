@@ -71,7 +71,7 @@ const UserCard = ({ user, location, getAllUsers, setActiveSection }) => {
                   user.status === "Verified" ? "text-green-500" : "text-red-500"
                }`}
             >
-               {user.status}
+               {user.role === "Admin" ? "-" : user.status}
             </h3>
 
             <h3 className="font-medium text-[14px] truncate hidden 2xl:block">
