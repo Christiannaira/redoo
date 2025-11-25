@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Navbar from "../Navbar";
+import { useNavigate } from "react-router-dom";
 
 const DashboardLayout = ({ isLogin, setIsLogin }) => {
    const [sideOpen, setSideOpen] = useState(true);
+
+   const navigate = useNavigate();
 
    const [activeSection, setActiveSection] = useState(() => {
       return localStorage.getItem("activeSection") || "dashboard";
@@ -13,6 +16,12 @@ const DashboardLayout = ({ isLogin, setIsLogin }) => {
    useEffect(() => {
       localStorage.setItem("activeSection", activeSection);
    }, [activeSection]);
+
+   useEffect(() => {
+      if (!isLogin) {
+         navigate("/signin");
+      }
+   }, [isLogin, navigate]);
 
    return (
       <div>
