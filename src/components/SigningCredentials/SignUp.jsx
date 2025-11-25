@@ -11,6 +11,8 @@ const SignUp = () => {
    const [passOpen, setPassOpen] = useState(false);
    const [secondPassOpen, setSecondPassOpen] = useState(false);
 
+   const [inputReminder, setInputReminder] = useState("");
+
    const [username, setUsername] = useState("");
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
@@ -56,12 +58,14 @@ const SignUp = () => {
          password === "" ||
          confirmPassword === ""
       ) {
-         alert("field must no be empty");
+         setInputReminder("field must no be empty");
+         // alert("field must no be empty");
       } else {
          if (password === confirmPassword) {
             return true;
          }
-         alert("Your password does not match");
+         setInputReminder("Your password does not match");
+         // alert("Your password does not match");
       }
    };
 
@@ -173,6 +177,9 @@ const SignUp = () => {
                         />
                      )}
                   </div>
+               </div>
+               <div className="h-10 p-2">
+                  <h3 className="font-medium text-red-500">{inputReminder}</h3>
                </div>
                {/* BUTTON */}
             </form>
