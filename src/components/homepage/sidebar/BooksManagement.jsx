@@ -4,8 +4,10 @@ import BookCard from "./cards/BookCard";
 import { useOutletContext } from "react-router-dom";
 import BookPopup from "./cards/BookPopup";
 import { IoSearch } from "react-icons/io5";
+import { searchBook } from "../../../services/BooksServices";
+import { useNavigate } from "react-router-dom";
 
-const BooksManagement = () => {
+const BooksManagement = ({ isLogin, setIsLogin }) => {
    const [books, setBooks] = useState([]);
    const { activeSelection, setActiveSection } = useOutletContext();
    const [popUpBook, setPopUpBook] = useState(false);
@@ -13,13 +15,35 @@ const BooksManagement = () => {
    const [keyword, setKeyword] = useState("");
    const [results, setResults] = useState([]);
 
+   const navigator = useNavigate();
+
    const handleSearch = async (e) => {
-      alert("hello");
+      const value = e.target.value;
+      setKeyword(value);
+
+      if (value == "") {
+         setResults([]);
+         return;
+      }
+
+      searchBook(value)
+         .then((response) => {
+            setResults(response.data);
+         })
+         .catch((err) => {
+            console.error(err);
+         });
    };
 
    useEffect(() => {
       getAllBooks();
    }, []);
+
+   useEffect(() => {
+      if (!isLogin) {
+         navigator("/signin");
+      }
+   }, [isLogin, navigator]);
 
    function getAllBooks() {
       listBooks()
@@ -62,17 +86,16 @@ const BooksManagement = () => {
                type="text"
                placeholder="Search..."
                className="flex-1 min-w-0 focus:outline-none py-3 px-5"
+               value={keyword}
+               onChange={handleSearch}
             />
-            <button
-               className="rounded-tr-md rounded-br-md bg-[#333333] py-3 px-6 cursor-pointer transition-all duration-100 ease hover:bg-[#FF6927]"
-               onClick={handleSearch}
-            >
+            <button className="rounded-tr-md rounded-br-md bg-[#333333] py-3 px-6 cursor-pointer transition-all duration-100 ease hover:bg-[#FF6927]">
                <IoSearch size={20} className="inline-block text-white" />
             </button>
          </div>
 
          <div className="max-[500px]:grid-cols-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2x:grid-cols-7 gap-3 mt-5">
-            {books.map((book, index) => (
+            {((keyword === "" ? books : results) || []).map((book, index) => (
                <BookCard
                   book={book}
                   location={"books-management"}

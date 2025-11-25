@@ -21,6 +21,7 @@ function App() {
 
    useEffect(() => {
       localStorage.setItem("login", isLogin);
+      localStorage.setItem("activeSection", "dashboard");
    }, [isLogin]);
 
    return (
@@ -53,13 +54,29 @@ function App() {
 
                   {/* User Management Route has nested path*/}
                   <Route path="user-management">
-                     <Route index element={<UserManagement />} />
+                     <Route
+                        index
+                        element={
+                           <UserManagement
+                              isLogin={isLogin}
+                              setIsLogin={setIsLogin}
+                           />
+                        }
+                     />
                      <Route path="profile/:id" element={<UserProfileCard />} />
                   </Route>
 
                   {/* Book Management Route has nested path*/}
                   <Route path="books-management">
-                     <Route index element={<BooksManagement />} />
+                     <Route
+                        index
+                        element={
+                           <BooksManagement
+                              isLogin={isLogin}
+                              setIsLogin={setIsLogin}
+                           />
+                        }
+                     />
                      <Route path="book/:id" element={<BookProfileCard />} />
                   </Route>
 

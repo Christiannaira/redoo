@@ -8,7 +8,7 @@ import { useOutletContext } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import UserPopup from "./cards/UserPopup";
 
-const UserManagement = () => {
+const UserManagement = ({ isLogin, setIsLogin }) => {
    const [users, setUsers] = useState([]);
    const [keyword, setKeyword] = useState("");
    const [results, setResults] = useState([]);
@@ -18,6 +18,12 @@ const UserManagement = () => {
    const [popUpUser, setPopUpUser] = useState(false);
 
    const navigate = useNavigate();
+
+   useEffect(() => {
+      if (!isLogin) {
+         navigate("/signin");
+      }
+   }, [isLogin, navigate]);
 
    useEffect(() => {
       getAllUsers();
