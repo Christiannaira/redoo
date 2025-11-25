@@ -3,8 +3,9 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Navbar from "../Navbar";
 
-const DashboardLayout = () => {
+const DashboardLayout = ({ isLogin, setIsLogin }) => {
    const [sideOpen, setSideOpen] = useState(true);
+
    const [activeSection, setActiveSection] = useState(() => {
       return localStorage.getItem("activeSection") || "dashboard";
    });
@@ -21,6 +22,7 @@ const DashboardLayout = () => {
             setSideOpen={setSideOpen}
             activeSection={activeSection}
             setActiveSection={setActiveSection}
+            setIsLogin={setIsLogin}
          />
          <div
             className={

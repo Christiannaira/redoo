@@ -12,19 +12,44 @@ import UserProfileCard from "./components/homepage/sidebar/cards/UserProfileCard
 import BookProfileCard from "./components/homepage/sidebar/cards/BookProfileCard";
 import GettingStarted from "./components/SigningCredentials/GettingStarted";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function App() {
+   const [isLogin, setIsLogin] = useState(() => {
+      return localStorage.getItem("login") === "true";
+   });
+
+   useEffect(() => {
+      localStorage.setItem("login", isLogin);
+   }, [isLogin]);
+
    return (
       <div>
          <BrowserRouter>
             <Routes>
                <Route path="/" element={<GettingStarted />} />
                <Route path="/signup" element={<SignUp />} />
-               <Route path="/signin" element={<SignIn />} />
+               <Route
+                  path="/signin"
+                  element={<SignIn isLogin={isLogin} setIsLogin={setIsLogin} />}
+               />
 
                {/* Dashboard Route has nested path*/}
-               <Route path="/dashboard" element={<DashboardLayout />}>
-                  <Route index element={<Dashboard />} />
+               <Route
+                  path="/dashboard"
+                  element={
+                     <DashboardLayout
+                        isLogin={isLogin}
+                        setIsLogin={setIsLogin}
+                     />
+                  }
+               >
+                  <Route
+                     index
+                     element={
+                        <Dashboard isLogin={isLogin} setIsLogin={setIsLogin} />
+                     }
+                  />
 
                   {/* User Management Route has nested path*/}
                   <Route path="user-management">

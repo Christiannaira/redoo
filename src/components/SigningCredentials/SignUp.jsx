@@ -47,7 +47,8 @@ const SignUp = () => {
                navigator("/signin");
             })
             .catch((error) => {
-               console.error(error);
+               console.error("Account is already taken");
+               setInputReminder("Account is already taken");
             });
       }
    };
@@ -60,13 +61,13 @@ const SignUp = () => {
          password === "" ||
          confirmPassword === ""
       ) {
-         setInputReminder("field must no be empty");
+         setInputReminder("*field must no be empty*");
          // alert("field must no be empty");
       } else {
          if (password === confirmPassword) {
             return true;
          }
-         setInputReminder("Your password does not match");
+         setInputReminder("*Your password does not match*");
          // alert("Your password does not match");
       }
    };
@@ -213,7 +214,7 @@ const SignUp = () => {
 
                <div className="h-10 p-2 mt-5">
                   <h3 className="font-medium text-red-500">
-                     *{inputReminder}*
+                     {inputReminder ? inputReminder : ""}
                   </h3>
                </div>
 

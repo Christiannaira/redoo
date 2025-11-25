@@ -13,6 +13,7 @@ const Sidebar = ({
    setSideOpen,
    activeSection,
    setActiveSection,
+   setIsLogin,
 }) => {
    const handleSideOpen = () => {
       setSideOpen(!sideOpen);
@@ -233,7 +234,10 @@ const Sidebar = ({
                      </Link>
                   </h2>
                </li>
-               <li className="flex items-center gap-3 my-3 group cursor-pointer">
+               <li
+                  className="flex items-center gap-3 my-3 group cursor-pointer"
+                  onClick={() => setIsLogin(false)}
+               >
                   <IoLogOutSharp
                      size={20}
                      className="text-[#222222] group-hover:text-[#FF6927] transition duration-300"

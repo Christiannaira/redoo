@@ -8,7 +8,7 @@ import UserCard from "./cards/UserCard";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import BookCard from "./cards/BookCard";
 
-const Dashboard = () => {
+const Dashboard = ({ isLogin, setIsLogin }) => {
    const [users, setUsers] = useState([]);
    const { activeSelection, setActiveSection } = useOutletContext();
    const [count, setCount] = useState(0);
@@ -17,6 +17,14 @@ const Dashboard = () => {
    const [bookCounts, setBookCounts] = useState(0);
 
    const navigator = useNavigate();
+
+   // const [passOpen, setPassOpen] = useState(false);
+
+   useEffect(() => {
+      if (!isLogin) {
+         navigator("/signin");
+      }
+   }, [isLogin, navigator]);
 
    const handleViewClick = (type) => {
       switch (type) {

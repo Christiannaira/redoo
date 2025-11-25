@@ -6,7 +6,7 @@ import DummyImage from "../../assets/dummyImage.png";
 import { useNavigate } from "react-router-dom";
 import { loginAdmin, loginUser } from "../../services/UserServices";
 
-const SignUp = () => {
+const SignUp = ({ isLogin, setIsLogin }) => {
    const [passOpen, setPassOpen] = useState(false);
 
    const [username, setUsername] = useState("");
@@ -25,6 +25,7 @@ const SignUp = () => {
          const response = await loginAdmin(username, password);
 
          alert("Login Successful!");
+         setIsLogin(true);
          navigator("/dashboard");
       } catch (error) {
          if (error.response && error.response.status === 401) {
