@@ -30,11 +30,18 @@ const BookCard = ({ book, location, setActiveSection, index }) => {
             className="max-[500px]:flex-row  max-[500px]:items-center bg-white gap-2 rounded-md p-3 flex flex-col items-left cursor-pointer truncate"
             onClick={() => handleBook(book, "books-management")}
          >
-            <img
-               src={book.coverImageUrl || book.coverImagUrl}
-               alt={`${book.title} cover photo`}
-               className="inline-block cursor-pointer w-[100px] sm:w-full h-70"
-            />
+            {book.coverImageUrl || book.coverImagUrl ? (
+               <img
+                  src={book.coverImageUrl || book.coverImagUrl}
+                  alt={`${book.title} cover photo`}
+                  className="inline-block cursor-pointer w-[100px] sm:w-full h-70"
+               />
+            ) : (
+               <div className="inline-block cursor-pointer w-[100px] sm:w-full h-70">
+                  Loading...
+               </div>
+            )}
+
             <div className="px-2">
                <h2 className="text-[16px] sm:text-[20px] truncate font-medium">
                   {book.title}

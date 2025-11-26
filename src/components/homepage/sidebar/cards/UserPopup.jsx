@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createUser } from "../../../../services/UserServices";
+import { createUser, createGuestUser } from "../../../../services/UserServices";
 import { IoMdClose } from "react-icons/io";
 
 const UserPopup = ({ fetchUsers, setPopUpUser }) => {
@@ -8,6 +8,11 @@ const UserPopup = ({ fetchUsers, setPopUpUser }) => {
    const [password, setPassword] = useState("");
    const [confirmPassword, setConfirmPassword] = useState("");
    const [role, setRole] = useState("");
+
+   const [firstName, setFirstName] = useState("");
+   const [lastName, setLastName] = useState("");
+   const [address, setAddress] = useState("");
+   const [phoneNumber, setPhoneNumber] = useState("");
 
    const [fieldReminder, setFieldReminder] = useState("");
 
@@ -19,38 +24,75 @@ const UserPopup = ({ fetchUsers, setPopUpUser }) => {
       e.preventDefault();
       e.stopPropagation();
 
-      if (username === "" || email === "" || password === "") {
-         setFieldReminder("Please fill up the necessary info.");
-      } else {
-         if (password === "" || confirmPassword === "") {
-            setFieldReminder("Your Password is empty");
+      if (role === "Non-User") {
+         if (
+            firstName === "" ||
+            lastName === "" ||
+            email === "" ||
+            address === "" ||
+            phoneNumber === ""
+         ) {
+            setFieldReminder("Please fill up the necessary info.");
          } else {
-            if (password != confirmPassword) {
-               setFieldReminder("Your password doesn't match");
-               setPassword("");
-               setConfirmPassword("");
-               setRole("");
-            } else {
-               const userEntry = {
-                  username,
-                  email,
-                  password,
-                  role,
-               };
+            const guestEntry = {
+               firstName,
+               lastName,
+               email,
+               address,
+               phoneNumber,
+            };
 
-               createUser(userEntry)
-                  .then(() => {
-                     alert("User added");
-                     setUsername("");
-                     setEmail("");
-                     setPassword("");
-                     setConfirmPassword("");
-                     fetchUsers();
-                     setPopUpUser(false);
-                  })
-                  .catch((err) => {
-                     console.error(err);
-                  });
+            createGuestUser(guestEntry)
+               .then(() => {
+                  alert("added");
+                  setFirstName("");
+                  setLastName("");
+                  setEmail("");
+                  setAddress("");
+                  setPhoneNumber("");
+                  fetchUsers();
+                  setPopUpUser(false);
+               })
+               .catch((err) => {
+                  // console.error(err);
+                  // alert("Successfully User Added");
+               });
+         }
+      } else {
+         alert("hello");
+         if (username === "" || email === "" || password === "") {
+            setFieldReminder("Please fill up the necessary info.");
+         } else {
+            if (password === "" || confirmPassword === "") {
+               setFieldReminder("Your Password is empty");
+            } else {
+               if (password != confirmPassword) {
+                  setFieldReminder("Your password doesn't match");
+                  setPassword("");
+                  setConfirmPassword("");
+                  setRole("");
+               } else {
+                  const userEntry = {
+                     username,
+                     email,
+                     password,
+                     role,
+                  };
+
+                  createUser(userEntry)
+                     .then(() => {
+                        alert("User added");
+                        setUsername("");
+                        setEmail("");
+                        setPassword("");
+                        setConfirmPassword("");
+                        fetchUsers();
+                        setPopUpUser(false);
+                     })
+                     .catch((err) => {
+                        // console.error(err);
+                     });
+               }
             }
          }
       }
@@ -60,7 +102,9 @@ const UserPopup = ({ fetchUsers, setPopUpUser }) => {
       <div className="">
          <form onSubmit={handleNewEntry}>
             <div className="flex justify-between items-center">
-               <h3 className="text-2xl font-bold">Add New User</h3>
+               <h3 className="text-2xl font-bold">
+                  {role === "Non-User" ? "Add Guest" : "Add New User"}
+               </h3>
                <IoMdClose
                   size={30}
                   className="text-[#222222] cursor-pointer"
@@ -68,23 +112,108 @@ const UserPopup = ({ fetchUsers, setPopUpUser }) => {
                />
             </div>
             <div className="flex flex-col gap-4 mt-5">
-               <div>
-                  <label
-                     htmlFor="username"
-                     className="block font-medium text-[#515151]"
-                  >
-                     Username
-                  </label>
-                  <input
-                     id="username"
-                     name="username"
-                     type="text"
-                     placeholder="Enter username"
-                     className="block bg-gray-100/50 px-4 py-3 rounded-md w-full mt-2"
-                     value={username}
-                     onChange={(e) => setUsername(e.target.value)}
-                  />
-               </div>
+               {role === "Non-User" ? (
+                  <>
+                     <div>
+                        <div className="grid grid-cols-2 gap-3 mt-5">
+                           <div>
+                              <label
+                                 htmlFor="firstName"
+                                 className="block font-medium text-[#515151]"
+                              >
+                                 FirstName
+                              </label>
+                              <input
+                                 id="firstName"
+                                 name="firstName"
+                                 type="text"
+                                 placeholder="Enter firstname"
+                                 className="block bg-gray-100/50 px-4 py-3 rounded-md w-full mt-2"
+                                 value={firstName}
+                                 onChange={(e) => setFirstName(e.target.value)}
+                              />
+                           </div>
+                           <div>
+                              <label
+                                 htmlFor="lastName"
+                                 className="block font-medium text-[#515151]"
+                              >
+                                 LastName
+                              </label>
+                              <input
+                                 id="lastName"
+                                 name="lastName"
+                                 type="text"
+                                 placeholder="Enter lastname"
+                                 className="block bg-gray-100/50 px-4 py-3 rounded-md w-full mt-2"
+                                 value={lastName}
+                                 onChange={(e) => setLastName(e.target.value)}
+                              />
+                           </div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-3 mt-5">
+                           <div>
+                              <label
+                                 htmlFor="address"
+                                 className="block font-medium text-[#515151]"
+                              >
+                                 Address
+                              </label>
+                              <input
+                                 id="address"
+                                 name="address"
+                                 type="text"
+                                 placeholder="Enter address"
+                                 className="block bg-gray-100/50 px-4 py-3 rounded-md w-full mt-2"
+                                 value={address}
+                                 onChange={(e) => setAddress(e.target.value)}
+                              />
+                           </div>
+
+                           <div>
+                              <label
+                                 htmlFor="phoneNumber"
+                                 className="block font-medium text-[#515151]"
+                              >
+                                 Phone Number
+                              </label>
+                              <input
+                                 id="phoneNumber"
+                                 name="phoneNumber"
+                                 type="text"
+                                 placeholder="Enter phone number"
+                                 className="block bg-gray-100/50 px-4 py-3 rounded-md w-full mt-2"
+                                 value={phoneNumber}
+                                 onChange={(e) =>
+                                    setPhoneNumber(e.target.value)
+                                 }
+                              />
+                           </div>
+                        </div>
+                     </div>
+                  </>
+               ) : (
+                  <>
+                     {" "}
+                     <div>
+                        <label
+                           htmlFor="username"
+                           className="block font-medium text-[#515151]"
+                        >
+                           Username
+                        </label>
+                        <input
+                           id="username"
+                           name="username"
+                           type="text"
+                           placeholder="Enter username"
+                           className="block bg-gray-100/50 px-4 py-3 rounded-md w-full mt-2"
+                           value={username}
+                           onChange={(e) => setUsername(e.target.value)}
+                        />
+                     </div>
+                  </>
+               )}
                <div>
                   <label
                      htmlFor="email"
@@ -128,42 +257,60 @@ const UserPopup = ({ fetchUsers, setPopUpUser }) => {
                         />
                         Admin
                      </label>
+
+                     <label className="flex items-center gap-2">
+                        <input
+                           type="radio"
+                           name="role"
+                           value="Non-User"
+                           checked={role === "Non-User"}
+                           onChange={(e) => setRole(e.target.value)}
+                        />
+                        Non-User
+                     </label>
                   </div>
                </div>
-               <div>
-                  <label
-                     htmlFor="password"
-                     className="block font-medium text-[#515151]"
-                  >
-                     Password
-                  </label>
-                  <input
-                     id="password"
-                     name="password"
-                     type="password"
-                     placeholder="Enter password"
-                     className="block bg-gray-100/50 px-4 py-3 rounded-md w-full mt-2"
-                     value={password}
-                     onChange={(e) => setPassword(e.target.value)}
-                  />
-               </div>
-               <div>
-                  <label
-                     htmlFor="confirmPassword"
-                     className="block font-medium text-[#515151]"
-                  >
-                     Confirm Password
-                  </label>
-                  <input
-                     id="confirmPassword"
-                     name="confirmPassword"
-                     type="password"
-                     placeholder="Confirm Password"
-                     className="block bg-gray-100/50 px-4 py-3 rounded-md w-full mt-2"
-                     value={confirmPassword}
-                     onChange={(e) => setConfirmPassword(e.target.value)}
-                  />
-               </div>
+               {role === "Non-User" ? (
+                  <div></div>
+               ) : (
+                  <>
+                     <div>
+                        <label
+                           htmlFor="password"
+                           className="block font-medium text-[#515151]"
+                        >
+                           Password
+                        </label>
+                        <input
+                           id="password"
+                           name="password"
+                           type="password"
+                           placeholder="Enter password"
+                           className="block bg-gray-100/50 px-4 py-3 rounded-md w-full mt-2"
+                           value={password}
+                           onChange={(e) => setPassword(e.target.value)}
+                        />
+                     </div>
+
+                     <div>
+                        <label
+                           htmlFor="confirmPassword"
+                           className="block font-medium text-[#515151]"
+                        >
+                           Confirm Password
+                        </label>
+                        <input
+                           id="confirmPassword"
+                           name="confirmPassword"
+                           type="password"
+                           placeholder="Confirm Password"
+                           className="block bg-gray-100/50 px-4 py-3 rounded-md w-full mt-2"
+                           value={confirmPassword}
+                           onChange={(e) => setConfirmPassword(e.target.value)}
+                        />
+                     </div>
+                  </>
+               )}
                <div>
                   <h3 className="h-5 text-red-500 font-medium">
                      {fieldReminder ? "*" + fieldReminder + "*" : ""}

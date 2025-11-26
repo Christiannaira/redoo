@@ -146,6 +146,7 @@ const UserManagement = ({ isLogin, setIsLogin }) => {
                   Remove User
                </h3>
             </div>
+
             <div className="mt-5">
                {(keyword === "" ? users : results).map((user, key) => (
                   <UserCard
