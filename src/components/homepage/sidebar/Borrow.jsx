@@ -2,13 +2,16 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdArrowBackIos } from "react-icons/md";
 import { IoSearch } from "react-icons/io5";
+import BorrowPopup from "./cards/BorrowPopup";
 
 const Borrow = () => {
    const [keyword, setKeyword] = useState("");
    const [results, setResults] = useState([]);
 
+   const [popUpUser, setPopUpUser] = useState(false);
+
    const handleAddBorrowBook = () => {
-      alert("hello");
+      setPopUpUser(!popUpUser);
    };
 
    const handleSearch = async (e) => {
@@ -31,6 +34,22 @@ const Borrow = () => {
 
    return (
       <div className="p-4">
+         <div
+            className={`fixed top-0 left-0 w-full h-full z-100 bg-[#222222]/20 ${
+               popUpUser ? "block" : "hidden"
+            }`}
+            onClick={handleAddBorrowBook}
+         ></div>
+
+         {/* Add User Popup Section */}
+         <div
+            className={`w-200 p-5 fixed z-200 bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md z-500 ${
+               popUpUser ? "block" : "hidden"
+            }`}
+         >
+            <BorrowPopup />
+            {/* <UserPopup fetchUsers={getAllUsers} setPopUpUser={setPopUpUser} /> */}
+         </div>
          <div className="flex items-center">
             <div>
                <button
