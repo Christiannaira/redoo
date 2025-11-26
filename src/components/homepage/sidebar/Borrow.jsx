@@ -5,11 +5,12 @@ import { IoSearch } from "react-icons/io5";
 import BorrowPopup from "./cards/BorrowPopup";
 import { listBorrowHistory } from "../../../services/BorrowHistory";
 import BorrowHistoryCard from "./cards/BorrowHistoryCard";
+import { searchBorrowHistory } from "../../../services/BorrowHistory";
 
 const Borrow = () => {
    const [keyword, setKeyword] = useState("");
    const [results, setResults] = useState([]);
-
+   const [allBorrowHistory, setAllBorrowHistory] = useState([]);
    const [popUpUser, setPopUpUser] = useState(false);
 
    const handleAddBorrowBook = () => {
@@ -21,23 +22,31 @@ const Borrow = () => {
       setKeyword(value);
 
       if (value == "") {
-         setResults([]);
+         setAllBorrowHistory([]);
          return;
       }
 
-      // searchUser(value)
-      //    .then((response) => {
-      //       setResults(response.data);
-      //    })
-      //    .catch((err) => {
-      //       console.error(err);
-      //    });
+      // try {
+      //    const res = await searchBorrowHistory(value);
+      //    setResults(res.data);
+      //    console.log(res.data);
+      // } catch (err) {
+      //    console.error(err);
+      // }
+
+      searchBorrowHistory(value)
+         .then((res) => {
+            setAllBorrowHistory(res.data);
+            console.log(res.data);
+         })
+         .catch((err) => console.error(err));
    };
 
    const getAllBorrowHistory = () => {
       listBorrowHistory()
          .then((res) => {
-            console.log(res.data);
+            // setAllBorrowHistory(res.data);
+            // console.log(res.data);
             setResults(res.data);
          })
          .catch((err) => {
@@ -131,14 +140,16 @@ const Borrow = () => {
             </div>
 
             <div className="mt-5">
-               {results.map((borrowHistory, key) => (
-                  <BorrowHistoryCard
-                     borrowHistory={borrowHistory}
-                     key={key}
-                     location={"borrow"}
-                     getAllBorrowHistory={getAllBorrowHistory}
-                  />
-               ))}
+               {(keyword === "" ? results : allBorrowHistory).map(
+                  (borrowHistory, key) => (
+                     <BorrowHistoryCard
+                        borrowHistory={borrowHistory}
+                        key={key}
+                        location={"borrow"}
+                        getAllBorrowHistory={getAllBorrowHistory}
+                     />
+                  )
+               )}
             </div>
          </div>
       </div>

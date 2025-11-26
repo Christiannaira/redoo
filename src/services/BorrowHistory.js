@@ -8,3 +8,7 @@ export const borrowBook = (userId, bookId) =>
 
 export const listBorrowHistory = () =>
   axios.get(REST_API_BASE_URL);
+
+export const searchBorrowHistory = (keyword) => {
+  return axios.get(`${REST_API_BASE_URL}/search?q=${keyword}`);
+};
