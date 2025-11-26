@@ -9,7 +9,10 @@ const BookProfileCard = () => {
 
    useEffect(() => {
       getBook(id)
-         .then((response) => setBook(response.data))
+         .then((response) => {
+            setBook(response.data);
+            console.log(response.data);
+         })
          .catch((err) => console.error(err));
    }, [id]);
 
@@ -20,6 +23,7 @@ const BookProfileCard = () => {
          <h3>{book.title}</h3>
          <h3>{book.author}</h3>
          <a onClick={() => navigate("..")}>go back</a>
+         hello
       </div>
    );
 };

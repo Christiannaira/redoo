@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 const BookCard = ({ book, location, setActiveSection, index }) => {
    const navigate = useNavigate();
 
+   if (!book || !book.id || !book.title) return null;
+
    const handleBook = (book, page) => {
       if (page === "books-management") {
          navigate(`book/${book.id}`);

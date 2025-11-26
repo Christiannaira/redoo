@@ -80,7 +80,7 @@ const BookPopup = ({ fetchBooks, setPopUpBook }) => {
          publisher,
          category,
          summary,
-         publication_date: date,
+         publicationDate: date,
          genre,
          status,
          language,
@@ -98,21 +98,24 @@ const BookPopup = ({ fetchBooks, setPopUpBook }) => {
             fetchBooks(); // refresh UI
             setPopUpBook(false);
          })
-         .catch((err) => console.error(err));
+         .catch((err) => {
+            console.error(err);
+            alert("hello");
+         });
 
-      setTitle("");
-      setAuthor("");
-      setPublisher("");
-      setGenre("");
-      setCategory("");
-      setSummary("");
-      setLanguage("");
-      setStatus("");
-      setCopiesAvailable(null);
-      setTotalCopies(null);
-      setNumberOfPages(null);
-      setTags([]);
-      setDate("");
+      // setTitle("");
+      // setAuthor("");
+      // setPublisher("");
+      // setGenre("");
+      // setCategory("");
+      // setSummary("");
+      // setLanguage("");
+      // setStatus("");
+      // setCopiesAvailable(null);
+      // setTotalCopies(null);
+      // setNumberOfPages(null);
+      // setTags([]);
+      // setDate("");
    };
 
    return (

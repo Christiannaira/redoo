@@ -1,7 +1,5 @@
-import React from "react";
-
 const Approval = () => {
-   return <div>Approval</div>;
+   return <div className="p-4">Approval</div>;
 };
 
 export default Approval;

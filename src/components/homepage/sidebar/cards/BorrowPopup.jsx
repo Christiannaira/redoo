@@ -6,7 +6,7 @@ import { createGuestUser } from "../../../../services/UserServices";
 import { updateBook } from "../../../../services/BooksServices";
 import { updateUser } from "../../../../services/UserServices";
 
-const BorrowPopup = ({ setPopUpUser }) => {
+const BorrowPopup = ({ setPopUpUser, getAllBorrowHistory }) => {
    const [role, setRole] = useState("");
 
    const [firstName, setFirstName] = useState("");
@@ -23,83 +23,169 @@ const BorrowPopup = ({ setPopUpUser }) => {
    const [outputReminder, setOutputReminder] = useState("");
 
    const handleBorrowUser = () => {
-      const borrowBookUserEntry = [bookId, userId];
-      console.log(borrowBookUserEntry);
-
-      if (userId === "" || bookId === "") {
-         alert("field must not be empty");
-      } else {
-         borrowBook(userId, bookId)
-            .then((res) => {
-               alert("added");
-               setPopUpUser(false);
-            })
-            .catch((err) => {
-               console.error(err);
-            });
-      }
-   };
-
-   const handleBorrowNonUser = () => {
-      if (
-         firstName === "" ||
-         lastName === "" ||
-         address === "" ||
-         phoneNumber === "" ||
-         email === ""
-      ) {
-         alert("field must not be empty");
+      if (!userId || !bookId) {
+         alert("User ID and Book ID must not be empty");
          return;
       }
 
-      // 1. Get the book details
-      getBook(bookId)
-         .then((res) => {
-            const newCopies = res.data.copiesAvailable - 1;
+      // 1. Get user info first
+      getUser(userId)
+         .then(async (userRes) => {
+            if (!userRes.data) {
+               alert("User not found");
+               return Promise.reject("User not found");
+            }
+
+            return getBook(bookId).then((bookRes) => ({
+               user: userRes.data,
+               book: bookRes.data,
+            }));
+         })
+         .then(async ({ user, book }) => {
+            const newCopies = book.copiesAvailable - 1;
+
+            if (newCopies < 0) {
+               alert("No copies available");
+               return Promise.reject("No copies available");
+            }
+
+            // 2. Update book copies
+            return updateBook(bookId, { copiesAvailable: newCopies }).then(
+               () => user
+            );
+         })
+         .then(async (user) => {
+            // 3. Add borrowHistory
+            return borrowBook(user.id, bookId).then(() => user);
+         })
+         .then((user) => {
+            // 4. Update user's borrowedBooks count
+            const previous = user.booksBorrowed || 0;
+            const updatedCount = previous + 1;
+
+            return updateUser(user.id, { booksBorrowed: updatedCount });
+         })
+         .then(() => {
+            alert("Borrow process completed");
+            getAllBorrowHistory();
+            setPopUpUser(false);
+         })
+         .catch((err) => {
+            console.error(err);
+            alert("failed");
+         });
+   };
+
+   // const handleBorrowNonUser = () => {
+   //    if (
+   //       firstName === "" ||
+   //       lastName === "" ||
+   //       address === "" ||
+   //       phoneNumber === "" ||
+   //       email === ""
+   //    ) {
+   //       alert("field must not be empty");
+   //       return;
+   //    }
+
+   //    // 1. Get the book details
+   //    getBook(bookId)
+   //       .then((res) => {
+   //          const newCopies = res.data.copiesAvailable - 1;
+
+   //          if (newCopies < 0) {
+   //             alert("No copies available");
+   //             return;
+   //          }
+
+   //          // 2. Update the book copies
+   //          return updateBook(bookId, { copiesAvailable: newCopies })
+   //             .then(() => {
+   //                // 3. Create guest user
+   //                const guestData = {
+   //                   firstName,
+   //                   lastName,
+   //                   address,
+   //                   phoneNumber,
+   //                   email,
+   //                };
+
+   //                return createGuestUser(guestData);
+   //             })
+   //             .then((userRes) => {
+   //                // 4. Borrow the book
+
+   //                const userId = userRes.data.id;
+
+   //                // 4. Borrow the book (borrowHistory entry)
+   //                return borrowBook(userId, bookId).then(() => {
+   //                   // 5. Update user.borrowedBooks
+   //                   return getUser(userId).then((userData) => {
+   //                      const previousCount = userData.data.booksBorrowed || 0;
+   //                      const newCount = previousCount + 1;
+   //                      return updateUser(userId, { booksBorrowed: newCount });
+   //                   });
+   //                });
+
+   //                console.log(userId);
+
+   //                // return borrowBook(userRes.data.id, bookId);
+   //             })
+   //             .then(() => {
+   //                alert("Borrow process completed");
+   //                getAllBorrowHistory();
+   //                setPopUpUser(false);
+   //             });
+   //       })
+   //       .catch((err) => console.error(err));
+   // };
+
+   const handleBorrowNonUser = () => {
+      if (!firstName || !lastName || !address || !phoneNumber || !email) {
+         alert("Fields must not be empty");
+         return;
+      }
+
+      const guestData = { firstName, lastName, address, phoneNumber, email };
+
+      // 1. Create or get existing guest user
+      createGuestUser(guestData)
+         .then(async (userRes) => {
+            const userId = userRes.data.id;
+
+            // 2. Get book info
+            return getBook(bookId).then((res) => ({ userId, book: res.data }));
+         })
+         .then(({ userId, book }) => {
+            const newCopies = book.copiesAvailable - 1;
 
             if (newCopies < 0) {
                alert("No copies available");
                return;
             }
 
-            // 2. Update the book copies
-            return updateBook(bookId, { copiesAvailable: newCopies })
-               .then(() => {
-                  // 3. Create guest user
-                  const guestData = {
-                     firstName,
-                     lastName,
-                     address,
-                     phoneNumber,
-                     email,
-                  };
+            // 3. Update book copies
+            return updateBook(bookId, { copiesAvailable: newCopies }).then(
+               () => userId
+            );
+         })
+         .then(async (userId) => {
+            // 4. Register borrow in borrowHistory
+            return borrowBook(userId, bookId).then(() => userId);
+         })
+         .then(async (userId) => {
+            // 5. Update user's borrowedBooks count
+            return getUser(userId).then((userData) => {
+               const previousCount = userData.data.booksBorrowed || 0;
+               const newCount = previousCount + 1;
 
-                  return createGuestUser(guestData);
-               })
-               .then((userRes) => {
-                  // 4. Borrow the book
-
-                  const userId = userRes.data.id;
-
-                  // 4. Borrow the book (borrowHistory entry)
-                  return borrowBook(userId, bookId).then(() => {
-                     // 5. Update user.borrowedBooks
-                     return getUser(userId).then((userData) => {
-                        const previousCount = userData.data.booksBorrowed || 0;
-                        const newCount = previousCount + 1;
-
-                        return updateUser(userId, { booksBorrowed: newCount });
-                     });
-                  });
-
-                  console.log(userId);
-
-                  // return borrowBook(userRes.data.id, bookId);
-               })
-               .then(() => {
-                  alert("Borrow process completed");
-                  setPopUpUser(false);
-               });
+               return updateUser(userId, { booksBorrowed: newCount });
+            });
+         })
+         .then(() => {
+            alert("Borrow process completed");
+            getAllBorrowHistory();
+            setPopUpUser(false);
          })
          .catch((err) => console.error(err));
    };
