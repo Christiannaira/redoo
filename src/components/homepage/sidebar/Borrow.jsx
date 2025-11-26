@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdArrowBackIos } from "react-icons/md";
 import { IoSearch } from "react-icons/io5";
 import BorrowPopup from "./cards/BorrowPopup";
+import { listBorrowHistory } from "../../../services/BorrowHistory";
+import BorrowHistoryCard from "./cards/BorrowHistoryCard";
 
 const Borrow = () => {
    const [keyword, setKeyword] = useState("");
@@ -32,6 +34,21 @@ const Borrow = () => {
       //    });
    };
 
+   const getAllBorrowHistory = () => {
+      listBorrowHistory()
+         .then((res) => {
+            console.log(res.data);
+            setResults(res.data);
+         })
+         .catch((err) => {
+            console.error(err);
+         });
+   };
+
+   useEffect(() => {
+      getAllBorrowHistory();
+   }, []);
+
    return (
       <div className="p-4">
          <div
@@ -47,7 +64,7 @@ const Borrow = () => {
                popUpUser ? "block" : "hidden"
             }`}
          >
-            <BorrowPopup />
+            <BorrowPopup setPopUpUser={setPopUpUser} />
             {/* <UserPopup fetchUsers={getAllUsers} setPopUpUser={setPopUpUser} /> */}
          </div>
          <div className="flex items-center">
@@ -111,6 +128,17 @@ const Borrow = () => {
                <h3 className="text-[14px] font-medium truncate text-[#A9A9A9] text-center">
                   Return Book
                </h3>
+            </div>
+
+            <div className="mt-5">
+               {results.map((borrowHistory, key) => (
+                  <BorrowHistoryCard
+                     borrowHistory={borrowHistory}
+                     key={key}
+                     location={"borrow"}
+                     getAllBorrowHistory={getAllBorrowHistory}
+                  />
+               ))}
             </div>
          </div>
       </div>

@@ -154,6 +154,7 @@ const UserManagement = ({ isLogin, setIsLogin }) => {
                      key={key}
                      location={"user-management"}
                      getAllUsers={getAllUsers}
+                     setActiveSection={setActiveSection}
                   />
                ))}
             </div>

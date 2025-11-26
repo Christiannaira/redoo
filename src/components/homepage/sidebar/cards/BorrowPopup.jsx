@@ -4,7 +4,7 @@ import { getUser } from "../../../../services/UserServices";
 import { borrowBook } from "../../../../services/BorrowHistory";
 import { createGuestUser } from "../../../../services/UserServices";
 
-const BorrowPopup = () => {
+const BorrowPopup = ({ setPopUpUser }) => {
    const [role, setRole] = useState("");
 
    const [firstName, setFirstName] = useState("");
@@ -52,13 +52,18 @@ const BorrowPopup = () => {
       //   getUserById(userId);
       //   getBookById(bookId);
 
-      borrowBook(userId, bookId)
-         .then((res) => {
-            alert("added");
-         })
-         .catch((err) => {
-            console.error(err);
-         });
+      if (userId === "" || bookId === "") {
+         alert("field must not be empty");
+      } else {
+         borrowBook(userId, bookId)
+            .then((res) => {
+               alert("added");
+               setPopUpUser(false);
+            })
+            .catch((err) => {
+               console.error(err);
+            });
+      }
    };
 
    const handleBorrowNonUser = () => {
@@ -88,7 +93,7 @@ const BorrowPopup = () => {
                setAddress("");
                setPhoneNumber("");
                //    fetchUsers();
-               //    setPopUpUser(false);
+               setPopUpUser(false);
 
                borrowBook(res.data.id, bookId)
                   .then((res) => {
