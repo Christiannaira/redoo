@@ -309,7 +309,7 @@ const UserProfileCard = () => {
                               : "N/A"}
                         </h2>
                         <h2 className="block font-normal text-[#616161] truncate">
-                           {user.booksBorrowed ? booksBorrowed : "0"}
+                           {user.booksBorrowed > 0 ? user.booksBorrowed : "0"}
                         </h2>
                         <h2 className="block font-normal text-[#616161] truncate">
                            {user.id}

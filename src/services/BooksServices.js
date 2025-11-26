@@ -13,3 +13,5 @@ export const bookCount = () => axios.get(REST_API_BASE_URL + "/count");
 export const searchBook = (keyword) => axios.get(`${REST_API_BASE_URL}/search`, {
     params: {q: keyword},
 });;
+
+export const updateBook = (bookId, book) => axios.put(REST_API_BASE_URL + "/" + bookId, book);
