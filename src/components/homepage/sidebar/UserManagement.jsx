@@ -96,6 +96,7 @@ const UserManagement = ({ isLogin, setIsLogin }) => {
                User Management
             </h2>
          </div>
+
          <div className="bg-white p-5 rounded-sm mt-5 h-screen relative flex flex-col">
             <button
                className="px-5 py-3 w-35 max-w-full bg-[#FF6927] fixed bottom-10 right-10 rounded-sm cursor-pointer text-[#f7f7f7] font-medium"

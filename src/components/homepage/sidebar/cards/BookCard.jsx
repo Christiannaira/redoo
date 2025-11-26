@@ -1,14 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import BookProfileCard from "./BookProfileCard";
-import BooksPhoto from "../../../../assets/booksPhoto.png";
-import BooksOne from "../../../../assets/atomicHabits.jpg";
-import BooksTwo from "../../../../assets/powerHabits.jpg";
-import BooksThree from "../../../../assets/highlyEffectivePeople.png";
-import BooksFour from "../../../../assets/thinkgrowrich.jpg";
-import BooksFive from "../../../../assets/winfriends.jpg";
-import BooksSix from "../../../../assets/briefhistoryoftime.jpg";
-import BooksSeven from "../../../../assets/theselfishgene.jpg";
-import BooksEight from "../../../../assets/lecturephysics.jpg";
 
 const BookCard = ({ book, location, setActiveSection, index }) => {
    const navigate = useNavigate();
@@ -21,19 +11,6 @@ const BookCard = ({ book, location, setActiveSection, index }) => {
          setActiveSection("books-management");
       }
    };
-
-   const booksLocalCover = [
-      BooksOne,
-      BooksTwo,
-      BooksThree,
-      BooksFour,
-      BooksFive,
-      BooksSix,
-      BooksSeven,
-      BooksEight,
-      BooksOne,
-      BooksOne,
-   ];
 
    if (location === "books-management-dashboard") {
       return (
