@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getBook } from "../../../../services/BooksServices";
 import { getUser } from "../../../../services/UserServices";
 import { borrowBook } from "../../../../services/BorrowHistory";
+import { createGuestUser } from "../../../../services/UserServices";
 
 const BorrowPopup = () => {
    const [role, setRole] = useState("");
@@ -60,7 +61,51 @@ const BorrowPopup = () => {
          });
    };
 
-   const handleBorrowNonUser = () => {};
+   const handleBorrowNonUser = () => {
+      if (
+         firstName === "" ||
+         lastName === "" ||
+         address === "" ||
+         phoneNumber === "" ||
+         email === ""
+      ) {
+         alert("field must not be empty");
+      } else {
+         const borrowBookNonUserEntry = {
+            firstName,
+            lastName,
+            address,
+            phoneNumber,
+            email,
+         };
+
+         createGuestUser(borrowBookNonUserEntry)
+            .then((res) => {
+               alert("added");
+               setFirstName("");
+               setLastName("");
+               setEmail("");
+               setAddress("");
+               setPhoneNumber("");
+               //    fetchUsers();
+               //    setPopUpUser(false);
+
+               borrowBook(res.data.id, bookId)
+                  .then((res) => {
+                     alert("added");
+                  })
+                  .catch((err) => {
+                     console.error(err);
+                  });
+            })
+            .catch((err) => {
+               // console.error(err);
+               // alert("Successfully User Added");
+            });
+
+         console.log(borrowBookNonUserEntry);
+      }
+   };
 
    return (
       <div>
@@ -191,7 +236,10 @@ const BorrowPopup = () => {
                   </div>
 
                   <div className="mt-5">
-                     <button className="px-5 py-4 border rounded-sm">
+                     <button
+                        className="px-5 py-4 border rounded-sm"
+                        onClick={handleBorrowNonUser}
+                     >
                         Borrow Book
                      </button>
                   </div>
