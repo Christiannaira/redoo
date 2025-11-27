@@ -45,17 +45,7 @@ const BookPopup = ({ fetchBooks, setPopUpBook }) => {
       return publicUrlData.publicUrl; // ✅ return the URL
    };
 
-   const genreOptions = [
-      "Personal Development",
-      "Education",
-      "Health",
-      "Fitness",
-      "Science",
-      "Novel",
-      "Mathematics",
-      "Medicine",
-      "Law",
-   ];
+   const genreOptions = ["Action,", "Comedy", "Horror", "Thriller", "Romance"];
 
    const languageOptions = ["English", "Filipino", "Spanish"];
 
@@ -119,7 +109,7 @@ const BookPopup = ({ fetchBooks, setPopUpBook }) => {
    };
 
    return (
-      <div>
+      <div className="">
          <form onSubmit={handleNewBookEntry}>
             <div className="flex justify-between items-center">
                <h3 className="text-2xl font-bold">Add New Book</h3>

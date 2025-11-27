@@ -12,3 +12,9 @@ export const listBorrowHistory = () =>
 export const searchBorrowHistory = (keyword) => {
   return axios.get(`${REST_API_BASE_URL}/search?q=${keyword}`);
 };
+
+export const deleteBorrowHistory = (id) =>
+  axios.delete(`${REST_API_BASE_URL}/${id}`);
+
+export const updateBorrowHistory = (borrowHistoryId, borrowHistory) => axios.put(REST_API_BASE_URL + "/" + borrowHistoryId, borrowHistory);
+

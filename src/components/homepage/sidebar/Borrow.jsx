@@ -8,9 +8,11 @@ import BorrowHistoryCard from "./cards/BorrowHistoryCard";
 import { searchBorrowHistory } from "../../../services/BorrowHistory";
 
 const Borrow = () => {
-   const [keyword, setKeyword] = useState("");
-   const [results, setResults] = useState([]);
    const [allBorrowHistory, setAllBorrowHistory] = useState([]);
+   const [results, setResults] = useState([]);
+   const [searchResults, setSearchResults] = useState([]); // filtered list
+
+   const [keyword, setKeyword] = useState("");
    const [popUpUser, setPopUpUser] = useState(false);
 
    const handleAddBorrowBook = () => {
@@ -21,22 +23,14 @@ const Borrow = () => {
       const value = e.target.value;
       setKeyword(value);
 
-      if (value == "") {
-         setAllBorrowHistory([]);
+      if (value.trim() === "") {
+         setSearchResults([]);
          return;
       }
 
-      // try {
-      //    const res = await searchBorrowHistory(value);
-      //    setResults(res.data);
-      //    console.log(res.data);
-      // } catch (err) {
-      //    console.error(err);
-      // }
-
       searchBorrowHistory(value)
          .then((res) => {
-            setAllBorrowHistory(res.data);
+            setSearchResults(res.data);
             console.log(res.data);
          })
          .catch((err) => console.error(err));
@@ -47,8 +41,8 @@ const Borrow = () => {
          .then((res) => {
             // setAllBorrowHistory(res.data);
             // console.log(res.data);
-            console.log(res.data);
-            setResults(res.data);
+            console.log(res);
+            setAllBorrowHistory(res.data);
          })
          .catch((err) => {
             console.error(err);
@@ -146,13 +140,14 @@ const Borrow = () => {
             </div>
 
             <div className="mt-5">
-               {(keyword === "" ? results : allBorrowHistory).map(
+               {(keyword === "" ? allBorrowHistory : searchResults).map(
                   (borrowHistory, key) => (
                      <BorrowHistoryCard
                         borrowHistory={borrowHistory}
                         key={key}
                         location={"borrow"}
                         getAllBorrowHistory={getAllBorrowHistory}
+                        setPopUpUser={setPopUpUser}
                      />
                   )
                )}
