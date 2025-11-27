@@ -85,6 +85,29 @@ const BorrowHistoryCard = ({
          console.error(err);
          alert("Return failed");
       }
+      alert("handle return");
+   };
+
+   const handleApprove = async () => {
+      alert("approve");
+
+      try {
+         const historyId = borrowHistory.id;
+
+         // 4. Update status instead of deleting
+         await updateBorrowHistory(historyId, { status: "Approved" });
+
+         alert("Book returned successfully");
+         getAllBorrowHistory();
+         setPopUpUser(false);
+      } catch (err) {
+         console.error(err);
+         alert("Return failed");
+      }
+   };
+
+   const handleReject = async () => {
+      alert("reject");
    };
 
    return (
@@ -93,19 +116,15 @@ const BorrowHistoryCard = ({
             <h3 className="font-medium text-[14px] truncate hidden lg:block">
                {borrowHistory.user?.id ?? "N/A"}
             </h3>
-
             <h3 className="font-medium text-[14px] truncate">
                {borrowHistory.user?.username ?? "Unknown"}
             </h3>
-
             <h3 className="font-medium text-[14px] truncate hidden lg:block">
                {borrowHistory.user?.email ?? "No email"}
             </h3>
-
             <h3 className="font-medium text-[14px] truncate">
                {borrowHistory.book?.title ?? "Unknown Book"}
             </h3>
-
             <h3 className="font-medium text-[14px] truncate hidden lg:block">
                {borrowHistory.book?.author ?? "Unknown"}
             </h3>
@@ -118,12 +137,44 @@ const BorrowHistoryCard = ({
                        day: "numeric",
                     })}
             </h3>
-            <button
+            <div className="font-medium text-[14px] truncate">
+               {borrowHistory.status === "Pending" ? (
+                  // PENDING → APPROVE + REJECT
+                  <div className="flex gap-2">
+                     <button
+                        className="bg-green-500 text-white px-2 py-1 rounded cursor-pointer"
+                        onClick={handleApprove}
+                     >
+                        Approve
+                     </button>
+                     <button
+                        className="bg-red-500 text-white px-2 py-1 rounded cursor-pointer"
+                        onClick={handleReject}
+                     >
+                        Reject
+                     </button>
+                  </div>
+               ) : borrowHistory.status === "Approved" ||
+                 borrowHistory.status === "Borrowed" ? (
+                  // APPROVED or BORROWED → RETURN BUTTON
+                  <button
+                     className="bg-blue-500 text-white px-2 py-1 rounded w-full cursor-pointer"
+                     onClick={handleReturn}
+                  >
+                     Return
+                  </button>
+               ) : (
+                  // RETURNED or anything else → show plain text
+                  <h3 className="text-gray-400">
+                     {borrowHistory.status || "-"}
+                  </h3>
+               )}
+            </div>
+
+            {/* <button
                className="font-medium text-[14px] truncate"
-               onClick={handleReturn}
-            >
-               Return
-            </button>
+               // onClick={handleReturn}
+            ></button> */}
          </div>
       </div>
    );

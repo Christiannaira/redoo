@@ -126,7 +126,7 @@ const Sidebar = ({
                   </Link>
 
                   <Link
-                     to={"borrow-books"}
+                     to={"borrows-book"}
                      onClick={() => setActiveSection("borrows-book")}
                   >
                      <li
@@ -155,7 +155,8 @@ const Sidebar = ({
                         </h2>
                      </li>
                   </Link>
-                  <Link
+
+                  {/* <Link
                      to={"history"}
                      onClick={() => setActiveSection("history")}
                   >
@@ -183,9 +184,9 @@ const Sidebar = ({
                            History
                         </h2>
                      </li>
-                  </Link>
+                  </Link> */}
 
-                  <Link
+                  {/* <Link
                      to={"approval"}
                      onClick={() => setActiveSection("approval")}
                   >
@@ -213,14 +214,14 @@ const Sidebar = ({
                            Approval
                         </h2>
                      </li>
-                  </Link>
+                  </Link> */}
                </div>
             </ul>
          </div>
 
          <ul>
             <div>
-               <li className="flex items-center gap-3 my-3 group cursor-pointer">
+               {/* <li className="flex items-center gap-3 my-3 group cursor-pointer">
                   <IoSettingsOutline
                      size={20}
                      className="text-[#222222] group-hover:text-[#FF6927] transition duration-300"
@@ -233,7 +234,7 @@ const Sidebar = ({
                         Settings
                      </Link>
                   </h2>
-               </li>
+               </li> */}
                <li
                   className="flex items-center gap-3 my-3 group cursor-pointer"
                   onClick={() => setIsLogin(false)}

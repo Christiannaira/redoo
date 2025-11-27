@@ -7,13 +7,18 @@ import { listBorrowHistory } from "../../../services/BorrowHistory";
 import BorrowHistoryCard from "./cards/BorrowHistoryCard";
 import { searchBorrowHistory } from "../../../services/BorrowHistory";
 
+import { useOutletContext } from "react-router-dom";
+
 const Borrow = () => {
    const [allBorrowHistory, setAllBorrowHistory] = useState([]);
    const [results, setResults] = useState([]);
    const [searchResults, setSearchResults] = useState([]); // filtered list
 
    const [keyword, setKeyword] = useState("");
+
    const [popUpUser, setPopUpUser] = useState(false);
+
+   const { activeSelection, setActiveSection } = useOutletContext();
 
    const handleAddBorrowBook = () => {
       setPopUpUser(!popUpUser);
@@ -96,7 +101,7 @@ const Borrow = () => {
 
          <div className="bg-white p-5 rounded-sm mt-5 h-screen relative flex flex-col">
             <button
-               className="px-5 py-3 w-35 max-w-full bg-[#FF6927] fixed bottom-10 right-10 rounded-sm cursor-pointer text-[#f7f7f7] font-medium"
+               className="px-5 py-3 w-50 max-w-full bg-[#FF6927] fixed bottom-10 right-10 rounded-sm cursor-pointer text-[#f7f7f7] font-medium"
                onClick={handleAddBorrowBook}
             >
                Borrowed Book

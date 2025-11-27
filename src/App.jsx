@@ -80,7 +80,7 @@ function App() {
                      <Route path="book/:id" element={<BookProfileCard />} />
                   </Route>
 
-                  <Route path="borrow-books" element={<BorrowBooks />} />
+                  <Route path="borrows-book" element={<BorrowBooks />} />
                   <Route path="history" element={<History />} />
                   <Route path="approval" element={<Approval />} />
                </Route>

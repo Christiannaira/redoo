@@ -36,10 +36,18 @@ const Dashboard = ({ isLogin, setIsLogin }) => {
             navigator("/dashboard/books-management");
             setActiveSection("books-management");
             break;
+         case "borrows-book":
+            navigator("/dashboard/borrows-book");
+            setActiveSection("borrows-book");
          default:
             return;
       }
    };
+
+   // const handleReturnClick = () => {
+   //    navigator("/dashboard/borrow-books");
+   //    setActiveSection("borrow-books");
+   // };
 
    useEffect(() => {
       getAllUsers();
@@ -138,7 +146,7 @@ const Dashboard = ({ isLogin, setIsLogin }) => {
                   </div>
                   <div>
                      <span className="text-sm font-medium text-gray-400">
-                        Borrowed Books
+                        Total Books
                      </span>
                      <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-700">
                         {bookCounts}
@@ -226,10 +234,13 @@ const Dashboard = ({ isLogin, setIsLogin }) => {
                      </div>
                   </div>
                   <div className="flex items-center justify-center gap-3 mt-5">
-                     <button className="px-8 py-4 border border-orange-600 rounded-2xl cursor-pointer hover:bg-orange-600 hover:text-white transition-all duration ease-in-out font-medium">
+                     {/* <button className="px-8 py-4 border border-orange-600 rounded-2xl cursor-pointer hover:bg-orange-600 hover:text-white transition-all duration ease-in-out font-medium">
                         Borrow Book
-                     </button>
-                     <button className="px-8 py-4 border border-transparent bg-orange-600 text-white rounded-2xl cursor-pointer hover:border-orange-600 transition-all duration ease-in-out hover:bg-orange-700 font-medium">
+                     </button> */}
+                     <button
+                        className="px-8 py-4 border border-transparent bg-orange-600 text-white rounded-2xl cursor-pointer hover:border-orange-600 transition-all duration ease-in-out hover:bg-orange-700 font-medium"
+                        onClick={() => handleViewClick("borrows-book")}
+                     >
                         Return Books
                      </button>
                   </div>

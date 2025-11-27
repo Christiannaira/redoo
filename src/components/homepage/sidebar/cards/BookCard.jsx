@@ -54,6 +54,14 @@ const BookCard = ({ book, location, setActiveSection, index }) => {
                <div className="mt-2">
                   <div className="flex justify-between">
                      <h3 className="text-[14px] sm:text-md font-medium text-[#515151] truncate">
+                        ReferenceID
+                     </h3>
+                     <span className="text-[14px] sm:text-md font-bold text-[#FD7C43] truncate">
+                        {book.id ? book.id : "-"}
+                     </span>
+                  </div>
+                  <div className="flex justify-between">
+                     <h3 className="text-[14px] sm:text-md font-medium text-[#515151] truncate">
                         Copies Available
                      </h3>
                      <span className="text-[14px] sm:text-md font-bold text-[#FD7C43] truncate">
