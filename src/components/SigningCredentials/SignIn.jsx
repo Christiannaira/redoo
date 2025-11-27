@@ -1,17 +1,20 @@
 import { PiUserDuotone, PiEye, PiEyeClosed } from "react-icons/pi";
 import { RiLockPasswordLine } from "react-icons/ri";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GoArrowLeft } from "react-icons/go";
 import DummyImage from "../../assets/dummyImage.png";
 import { useNavigate } from "react-router-dom";
 import { loginAdmin, loginUser } from "../../services/UserServices";
 
-const SignUp = ({ isLogin, setIsLogin }) => {
+const SignIn = ({ isLogin, setIsLogin }) => {
    const [passOpen, setPassOpen] = useState(false);
 
    const [username, setUsername] = useState("");
    const [password, setPassword] = useState("");
 
+   const [currentUserLogin, setCurrentUserLogin] = useState(() => {
+      return localStorage.getItem("currentUserLogin") || "";
+   });
    const navigator = useNavigate();
 
    const toSignUp = () => {
@@ -23,7 +26,9 @@ const SignUp = ({ isLogin, setIsLogin }) => {
 
       try {
          const response = await loginAdmin(username, password);
-
+         // setCurrentUserLogin(username);
+         setCurrentUserLogin(username);
+         // localStorage.setItem("currentUserLogin", username);
          alert("Login Successful!");
          setIsLogin(true);
          navigator("/dashboard");
@@ -35,6 +40,10 @@ const SignUp = ({ isLogin, setIsLogin }) => {
          }
       }
    };
+
+   useEffect(() => {
+      localStorage.setItem("currentUserLogin", currentUserLogin);
+   }, [currentUserLogin]);
 
    return (
       <div className="w-full min-h-screen p-5 grid lg:grid-cols-2 grid-cols-1 gap-5">
@@ -130,4 +139,4 @@ const SignUp = ({ isLogin, setIsLogin }) => {
    );
 };
 
-export default SignUp;
+export default SignIn;

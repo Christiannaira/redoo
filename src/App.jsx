@@ -15,6 +15,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function App() {
+   const [currentUserLogin, setCurrentUserLogin] = useState("");
+
    const [isLogin, setIsLogin] = useState(() => {
       return localStorage.getItem("login") === "true";
    });
