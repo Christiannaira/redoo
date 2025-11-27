@@ -7,6 +7,8 @@ import InputTags from "./booksInputFields/InputTags";
 import InputImage from "./booksInputFields/InputImage";
 import { updateBook } from "../../../../services/BooksServices";
 import { supabase } from "../../../../supabase/supabaseClient";
+import { MdArrowBackIos } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const BookProfileCard = () => {
    const { id } = useParams();
@@ -83,20 +85,47 @@ const BookProfileCard = () => {
             imageUrl = uploadedUrl;
          }
 
+         // const updatedBookEntry = {
+         //    title,
+         //    author,
+         //    publisher,
+         //    category,
+         //    summary,
+         //    publicationDate: date,
+         //    genre,
+         //    status,
+         //    language,
+         //    copiesAvailable,
+         //    totalCopies,
+         //    numberOfPages,
+         //    tags,
+         //    coverImageUrl: imageUrl,
+         // };
          const updatedBookEntry = {
-            title,
-            author,
-            publisher,
-            category,
-            summary,
-            publicationDate: date,
-            genre,
-            status,
-            language,
-            copiesAvailable,
-            totalCopies,
-            numberOfPages,
-            tags,
+            title: title || book.title,
+            author: author || book.author,
+            publisher: publisher || book.publisher,
+            category: category || book.category,
+            summary: summary || book.summary,
+            publicationDate: date || book.publicationDate,
+            genre: genre || book.genre,
+            status: status || book.status,
+            language: language || book.language,
+            copiesAvailable:
+               copiesAvailable !== "" && copiesAvailable !== null
+                  ? copiesAvailable
+                  : book.copiesAvailable,
+            totalCopies:
+               totalCopies !== "" && totalCopies !== null
+                  ? totalCopies
+                  : book.totalCopies,
+            numberOfPages:
+               numberOfPages !== "" && numberOfPages !== null
+                  ? numberOfPages
+                  : book.numberOfPages,
+            tags: tags || book.tags,
+
+            // cover image uses existing unless a new one is uploaded
             coverImageUrl: imageUrl,
          };
 
@@ -113,10 +142,20 @@ const BookProfileCard = () => {
 
    return (
       <div className="m-5 p-5 bg-white rounded-md">
+         <div className="flex items-center">
+            <div>
+               <Link to={".."}>
+                  <MdArrowBackIos size={25} />
+               </Link>
+            </div>
+            <h2 className="ml-2 text-4xl font-medium text-[#444444] truncate">
+               Edit Book Collection
+            </h2>
+         </div>
          <form onSubmit={handleUpdateBook}>
-            <h3>{book.title}</h3>
-            <h3>{book.author}</h3>
-            <a onClick={() => navigate("..")}>go back</a>
+            {/* <h3>{book.title}</h3>
+            <h3>{book.author}</h3> */}
+            {/* <a onClick={() => navigate("..")}>go back</a> */}
             <div className="flex flex-col gap-4 mt-5">
                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div>
@@ -284,7 +323,7 @@ const BookProfileCard = () => {
                type="submit"
                className="px-5 py-3 w-full max-w-full bg-[#FF6927] rounded-sm cursor-pointer text-[#f7f7f7] font-medium"
             >
-               Add Book to the Collection
+               Update Book to the Collection
             </button>
          </form>
       </div>

@@ -5,12 +5,12 @@ const InputImage = ({ setImage }) => {
    return (
       <div>
          <div>
-            <div>
+            <div className="my-5">
                <input
                   type="file"
                   accept="image/*"
                   onChange={(e) => setImage(e.target.files[0])}
-                  className="border"
+                  className="border py-2 px-4 rounded-md border-gray-300 text-gray-300"
                />
                {/* <button
                   className="border p-2 bg-gray-500"
